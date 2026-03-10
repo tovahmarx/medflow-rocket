@@ -12,6 +12,7 @@ const filters = ['All', 'Top', 'Repeat', 'At Risk', 'Cold', 'Overdue'];
 
 export default function DoctorAccounts() {
   const [activeFilter, setActiveFilter] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,6 +21,13 @@ export default function DoctorAccounts() {
   }, []);
 
   const filtered = doctorAccounts.filter(d => {
+    const user = users.find(u => u.id === d.userId);
+    const matchesSearch = !searchQuery || 
+      user?.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user?.npi?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user?.practice?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user?.specialty?.toLowerCase().includes(searchQuery.toLowerCase());
+    if (!matchesSearch) return false;
     if (activeFilter === 'All') return true;
     if (activeFilter === 'Overdue') return d.cadenceStatus === 'red';
     return d.tier === activeFilter;
@@ -32,7 +40,7 @@ export default function DoctorAccounts() {
         <div className="flex items-center gap-2">
           <div className="flex flex-1 items-center gap-2 rounded-lg border bg-card px-3 py-2">
             <Search className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-            <input placeholder="Search by name, NPI..." className="flex-1 min-w-0 bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
+            <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search by name, NPI..." className="flex-1 min-w-0 bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
           </div>
           <button className="flex items-center gap-1 rounded-lg bg-primary px-3 py-2.5 text-xs font-medium text-primary-foreground tap-target flex-shrink-0">
             <Plus className="h-4 w-4" /> Add
