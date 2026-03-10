@@ -40,32 +40,7 @@ export default function LoginPage() {
           <p className="mt-1 text-sm text-muted-foreground">Medical Sales Platform</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-3">
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={e => { setEmail(e.target.value); setError(''); }}
-            className="w-full rounded-lg border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => { setPassword(e.target.value); setError(''); }}
-            className="w-full rounded-lg border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-          {error && <p className="text-xs text-destructive">{error}</p>}
-          <button type="submit" className="w-full rounded-lg bg-primary py-3 text-sm font-semibold text-primary-foreground tap-target active:bg-primary/90">
-            Sign In
-          </button>
-          <button type="button" className="w-full rounded-lg border py-3 text-sm font-medium text-foreground tap-target">
-            Sign in with Google
-          </button>
-          <p className="text-center text-xs text-muted-foreground">
-            <button type="button" className="text-primary hover:underline">Forgot password?</button>
-          </p>
-        </form>
+        <p className="text-center text-sm text-muted-foreground">Click a demo account below to view its dashboard</p>
 
         <div className="mt-8">
           <div className="flex items-center gap-3">
