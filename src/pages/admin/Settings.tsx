@@ -103,11 +103,23 @@ const sections = [
       </div>
     ),
   },
-  {
-    title: 'Onboarding Tour',
-    content: () => <OnboardingButton />,
-  },
 ];
+
+function OnboardingButton() {
+  const { startTour } = useTour();
+  return (
+    <button onClick={startTour} className="rounded-lg border py-3 w-full text-sm font-medium text-foreground tap-target">
+      Restart Onboarding Tour
+    </button>
+  );
+}
+
+const onboardingSection = {
+  title: 'Onboarding Tour',
+  content: () => <OnboardingButton />,
+};
+
+const allSections = [...sections, onboardingSection];
 
 export default function Settings() {
   const [openSections, setOpenSections] = useState<Set<string>>(new Set());
