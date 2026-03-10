@@ -26,6 +26,17 @@ export const users: User[] = [
   { id: 'u8', name: 'Dr. Marcus Webb', initials: 'MW', email: 'mwebb@coastalwh.com', role: 'doctor', specialty: 'OB/GYN', practice: 'Coastal Women\'s Health', npi: '3456789012', phone: '(305) 555-0103' },
   { id: 'u9', name: 'Dr. Elena Cruz', initials: 'EC', email: 'ecruz@cruzassoc.com', role: 'doctor', specialty: 'Urology', practice: 'Cruz & Associates', npi: '4567890123', phone: '(415) 555-0104' },
   { id: 'u10', name: 'Dr. Samuel Addo', initials: 'SA', email: 'saddo@tampasurg.com', role: 'doctor', specialty: 'Surgery', practice: 'Tampa Surgery Ctr', npi: '5678901234', phone: '(813) 555-0105' },
+  { id: 'u11', name: 'Dr. Anika Rao', initials: 'AR', email: 'arao@raoortho.com', role: 'doctor', specialty: 'Orthopedics', practice: 'Rao Ortho Group', npi: '6789012345', phone: '(617) 555-0106' },
+  { id: 'u12', name: 'Dr. Kwame Diallo', initials: 'KD', email: 'kdiallo@bostonmed.com', role: 'doctor', specialty: 'Internal Medicine', practice: 'Boston Med Group', npi: '7890123456', phone: '(617) 555-0107' },
+  { id: 'u13', name: 'Dr. Lisa Kim', initials: 'LK', email: 'lkim@kimcardio.com', role: 'doctor', specialty: 'Cardiology', practice: 'Kim Cardiology', npi: '8901234567', phone: '(212) 555-0108' },
+  { id: 'u14', name: 'Dr. David Foster', initials: 'DF', email: 'dfoster@fosterfm.com', role: 'doctor', specialty: 'Family Medicine', practice: 'Foster Family Med', npi: '9012345678', phone: '(312) 555-0109' },
+  { id: 'u15', name: 'Dr. Yuki Tanaka', initials: 'YT', email: 'ytanaka@tanakaent.com', role: 'doctor', specialty: 'ENT', practice: 'Tanaka ENT', npi: '0123456789', phone: '(503) 555-0110' },
+  { id: 'u16', name: 'Dr. Huy Nguyen', initials: 'HN', email: 'hnguyen@nguyenim.com', role: 'doctor', specialty: 'Internal Medicine', practice: 'Nguyen Internal Med', npi: '1122334455', phone: '(312) 555-0111' },
+  { id: 'u17', name: 'Dr. Rachel Adams', initials: 'RA', email: 'radams@adamssurg.com', role: 'doctor', specialty: 'Surgery', practice: 'Adams Surgical', npi: '2233445566', phone: '(312) 555-0112' },
+  { id: 'u18', name: 'Dr. Vikram Patel', initials: 'VP', email: 'vpatel@patelderm.com', role: 'doctor', specialty: 'Dermatology', practice: 'Patel Dermatology', npi: '3344556677', phone: '(415) 555-0113' },
+  { id: 'u19', name: 'Dr. Maria Reyes', initials: 'MR', email: 'mreyes@reyesmed.com', role: 'doctor', specialty: 'Internal Medicine', practice: 'Reyes Medical', npi: '4455667788', phone: '(813) 555-0114' },
+  { id: 'u20', name: 'Dr. Thomas Hill', initials: 'TH', email: 'thill@hillclinic.com', role: 'doctor', specialty: 'Urology', practice: 'Hill Clinic', npi: '5566778899', phone: '(813) 555-0115' },
+  { id: 'u21', name: 'Dr. Wei Chen', initials: 'WC', email: 'wchen@chenpractice.com', role: 'doctor', specialty: 'Gastroenterology', practice: 'Chen Practice', npi: '6677889900', phone: '(813) 555-0116' },
 ];
 
 export const reps = users.filter(u => u.role === 'rep');
