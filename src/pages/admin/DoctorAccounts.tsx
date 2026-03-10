@@ -20,6 +20,13 @@ export default function DoctorAccounts() {
   }, []);
 
   const filtered = doctorAccounts.filter(d => {
+    const user = users.find(u => u.id === d.userId);
+    const matchesSearch = !searchQuery || 
+      user?.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user?.npi?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user?.practice?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user?.specialty?.toLowerCase().includes(searchQuery.toLowerCase());
+    if (!matchesSearch) return false;
     if (activeFilter === 'All') return true;
     if (activeFilter === 'Overdue') return d.cadenceStatus === 'red';
     return d.tier === activeFilter;
