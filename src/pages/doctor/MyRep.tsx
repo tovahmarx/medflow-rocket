@@ -18,11 +18,11 @@ export default function MyRep() {
     <>
       <TopBar title="My Rep" />
       <div className="space-y-4 p-4">
-        {/* Rep Card */}
+        {rep && (
         <div className="rounded-lg border bg-card p-4 text-center">
-          <AvatarCircle initials="CM" size="lg" className="mx-auto" />
-          <p className="mt-2 text-base font-semibold text-foreground">Clint M.</p>
-          <p className="text-xs text-muted-foreground">Sales Rep · Southeast</p>
+          <AvatarCircle initials={rep.initials} size="lg" className="mx-auto" />
+          <p className="mt-2 text-base font-semibold text-foreground">{rep.name}</p>
+          <p className="text-xs text-muted-foreground">Sales Rep · {rep.territory}</p>
           <div className="mt-4 flex gap-2">
             <button className="flex flex-1 items-center justify-center gap-1 rounded-lg border py-2.5 text-xs font-medium text-foreground tap-target">
               <Phone className="h-4 w-4" /> Call
