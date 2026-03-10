@@ -8,6 +8,7 @@ import LoginPage from "@/pages/LoginPage";
 import AdminShell from "@/layouts/AdminShell";
 import RepShell from "@/layouts/RepShell";
 import DoctorShell from "@/layouts/DoctorShell";
+// Admin
 import CommandCenter from "@/pages/admin/CommandCenter";
 import SalesReps from "@/pages/admin/SalesReps";
 import DoctorAccounts from "@/pages/admin/DoctorAccounts";
@@ -18,6 +19,16 @@ import Billing from "@/pages/admin/Billing";
 import Compliance from "@/pages/admin/Compliance";
 import SampleLots from "@/pages/admin/SampleLots";
 import EmailSequences from "@/pages/admin/EmailSequences";
+import GoalTracking from "@/pages/admin/GoalTracking";
+import TerritoryMap from "@/pages/admin/TerritoryMap";
+import RepOnboarding from "@/pages/admin/RepOnboarding";
+import Invitations from "@/pages/admin/Invitations";
+import AuditLog from "@/pages/admin/AuditLog";
+import Reports from "@/pages/admin/Reports";
+import AdminContentLibrary from "@/pages/admin/AdminContentLibrary";
+import AdminPipeline from "@/pages/admin/AdminPipeline";
+import Settings from "@/pages/admin/Settings";
+// Rep
 import MyTasks from "@/pages/rep/MyTasks";
 import CommsHub from "@/pages/rep/CommsHub";
 import LeadCapture from "@/pages/rep/LeadCapture";
@@ -29,26 +40,23 @@ import ExpenseTracker from "@/pages/rep/ExpenseTracker";
 import ContentLibrary from "@/pages/rep/ContentLibrary";
 import MyContacts from "@/pages/rep/MyContacts";
 import ObjectionLibrary from "@/pages/rep/ObjectionLibrary";
+// Doctor
 import DoctorHome from "@/pages/doctor/DoctorHome";
 import OrderProducts from "@/pages/doctor/OrderProducts";
 import OrderHistory from "@/pages/doctor/OrderHistory";
 import Learn from "@/pages/doctor/Learn";
 import MyRep from "@/pages/doctor/MyRep";
+// Shared
+import Leaderboard from "@/pages/shared/Leaderboard";
+import CalendarPage from "@/pages/shared/CalendarPage";
+import Chat from "@/pages/shared/Chat";
+import TrainingHub from "@/pages/shared/TrainingHub";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-function Placeholder({ title }: { title: string }) {
-  return (
-    <div className="p-4">
-      <h1 className="text-lg font-bold text-foreground">{title}</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Coming soon</p>
-    </div>
-  );
-}
-
 function AuthenticatedRoutes() {
-  const { user, role, isAuthenticated } = useAuth();
+  const { role, isAuthenticated } = useAuth();
 
   if (!isAuthenticated) return <LoginPage />;
 
@@ -65,24 +73,24 @@ function AuthenticatedRoutes() {
         <Route path="doctors" element={<DoctorAccounts />} />
         <Route path="comms" element={<CommsCenter />} />
         <Route path="approvals" element={<Approvals />} />
-        <Route path="pipeline" element={<Placeholder title="Pipeline" />} />
+        <Route path="pipeline" element={<AdminPipeline />} />
         <Route path="sequences" element={<EmailSequences />} />
-        <Route path="territory" element={<Placeholder title="Territory Map" />} />
-        <Route path="calendar" element={<Placeholder title="Calendar" />} />
+        <Route path="territory" element={<TerritoryMap />} />
+        <Route path="calendar" element={<CalendarPage />} />
         <Route path="inventory" element={<InventoryTracker />} />
         <Route path="billing" element={<Billing />} />
         <Route path="samples" element={<SampleLots />} />
         <Route path="compliance" element={<Compliance />} />
-        <Route path="onboarding" element={<Placeholder title="Rep Onboarding" />} />
-        <Route path="training" element={<Placeholder title="Training" />} />
-        <Route path="reports" element={<Placeholder title="Reports" />} />
-        <Route path="content" element={<Placeholder title="Content Library" />} />
-        <Route path="chat" element={<Placeholder title="Chat" />} />
-        <Route path="invitations" element={<Placeholder title="Invitations" />} />
-        <Route path="audit" element={<Placeholder title="Audit Log" />} />
-        <Route path="goals" element={<Placeholder title="Goals" />} />
-        <Route path="leaderboard" element={<Placeholder title="Leaderboard" />} />
-        <Route path="settings" element={<Placeholder title="Settings" />} />
+        <Route path="onboarding" element={<RepOnboarding />} />
+        <Route path="training" element={<TrainingHub />} />
+        <Route path="reports" element={<Reports />} />
+        <Route path="content" element={<AdminContentLibrary />} />
+        <Route path="chat" element={<Chat />} />
+        <Route path="invitations" element={<Invitations />} />
+        <Route path="audit" element={<AuditLog />} />
+        <Route path="goals" element={<GoalTracking />} />
+        <Route path="leaderboard" element={<Leaderboard />} />
+        <Route path="settings" element={<Settings />} />
       </Route>
 
       {/* Rep Routes */}
@@ -93,16 +101,16 @@ function AuthenticatedRoutes() {
         <Route path="pipeline" element={<MyPipeline />} />
         <Route path="contacts" element={<MyContacts />} />
         <Route path="commission" element={<Commission />} />
-        <Route path="leaderboard" element={<Placeholder title="Leaderboard" />} />
-        <Route path="calendar" element={<Placeholder title="Calendar" />} />
+        <Route path="leaderboard" element={<Leaderboard isRepView />} />
+        <Route path="calendar" element={<CalendarPage />} />
         <Route path="expenses" element={<ExpenseTracker />} />
         <Route path="quotes" element={<QuoteBuilder />} />
         <Route path="content" element={<ContentLibrary />} />
-        <Route path="training" element={<Placeholder title="Training" />} />
-        <Route path="chat" element={<Placeholder title="Chat" />} />
+        <Route path="training" element={<TrainingHub isRepView />} />
+        <Route path="chat" element={<Chat isRepView />} />
         <Route path="route" element={<RoutePlanner />} />
         <Route path="objections" element={<ObjectionLibrary />} />
-        <Route path="settings" element={<Placeholder title="Settings" />} />
+        <Route path="settings" element={<Settings />} />
       </Route>
 
       {/* Doctor Routes */}
