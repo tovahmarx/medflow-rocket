@@ -136,6 +136,7 @@ function AuthenticatedRoutes() {
           <Route path="my-rep" element={<MyRep />} />
           <Route path="help" element={<HelpSupport />} />
         </Route>
+        </Route>
 
         <Route path="*" element={<NotFound />} />
       </Routes>
