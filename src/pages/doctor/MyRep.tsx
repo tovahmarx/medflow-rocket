@@ -2,10 +2,16 @@ import { useState } from 'react';
 import { TopBar } from '@/components/layout/TopBar';
 import { AvatarCircle } from '@/components/shared/AvatarCircle';
 import { StatusBadge } from '@/components/shared/StatusBadge';
+import { useAuth } from '@/contexts/AuthContext';
+import { doctorAccounts, users } from '@/data/mock-data';
 import { Phone, Mail, Video, Star, Check } from 'lucide-react';
 
 export default function MyRep() {
+  const { user } = useAuth();
   const [rating, setRating] = useState(5);
+  const [feedbackSent, setFeedbackSent] = useState(false);
+  const myAccount = doctorAccounts.find(d => d.userId === user?.id);
+  const rep = myAccount ? users.find(u => u.id === myAccount.assignedRep) : null;
   const [feedbackSent, setFeedbackSent] = useState(false);
 
   return (
