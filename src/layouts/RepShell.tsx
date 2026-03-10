@@ -34,7 +34,7 @@ export default function RepShell() {
   return (
     <div className="flex min-h-screen w-full">
       <DesktopSidebar tabs={tabs} moreItems={moreItems} />
-      <div className="flex flex-1 flex-col pb-16 md:pb-0 md:min-w-0">
+      <div className="flex min-w-0 flex-1 flex-col overflow-x-hidden pb-16 md:pb-0">
         <AnimatedOutlet />
       </div>
       <BottomTabBar tabs={tabs} moreItems={moreItems} />
