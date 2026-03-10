@@ -113,6 +113,7 @@ const sections = [
 
 export default function Settings() {
   const [openSections, setOpenSections] = useState<Set<string>>(new Set());
+  const { startTour } = useTour();
 
   const toggle = (title: string) => {
     setOpenSections(prev => {
