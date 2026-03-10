@@ -12,7 +12,12 @@ export function TopBar({ title }: { title: string }) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const unread = notifications.filter(n => !n.read).length;
+  const userNotifications = notifications.filter(n => {
+    if (n.forRole !== role) return false;
+    if (n.forUserId && n.forUserId !== user?.id) return false;
+    return true;
+  });
+  const unread = userNotifications.filter(n => !n.read).length;
 
   const iconColor = (type: string) =>
     type === 'destructive' ? 'bg-destructive/10 text-destructive' :
