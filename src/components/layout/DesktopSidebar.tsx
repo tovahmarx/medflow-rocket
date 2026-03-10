@@ -16,7 +16,7 @@ export function DesktopSidebar({ tabs, moreItems }: DesktopSidebarProps) {
   const isActive = (path: string) => location.pathname.startsWith(path);
 
   return (
-    <aside className="hidden md:flex md:w-56 md:flex-col md:border-r md:bg-card">
+    <aside className="hidden md:flex md:w-56 md:flex-col md:border-r md:bg-card md:shadow-sm">
       <div className="flex items-center gap-2 border-b px-4 py-4">
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
           <Heart className="h-4 w-4 text-primary-foreground" />
