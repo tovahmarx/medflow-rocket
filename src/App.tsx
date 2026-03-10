@@ -145,6 +145,7 @@ const App = () => (
       <AuthProvider>
         <TourProvider>
           <BrowserRouter>
+            <OfflineBanner />
             <AuthenticatedRoutes />
           </BrowserRouter>
         </TourProvider>
