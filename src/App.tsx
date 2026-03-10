@@ -101,6 +101,7 @@ function AuthenticatedRoutes() {
           <Route path="settings" element={<Settings />} />
           <Route path="help" element={<HelpSupport />} />
         </Route>
+        </Route>
 
         {/* Rep Routes */}
         <Route path="/rep" element={<RepShell />}>
