@@ -292,3 +292,113 @@ export const npiDatabase: NPIResult[] = [
   { name: 'Dr. Maria Diallo', specialty: 'Internal Medicine', city: 'Boston', state: 'MA', npi: '6789012345', practice: 'Boston Med Group', phone: '(617) 555-0106', credential: 'MD' },
   { name: 'Dr. Carlos Reyes', specialty: 'Orthopedics', city: 'Chicago', state: 'IL', npi: '7890123456', practice: 'Reyes Ortho', phone: '(312) 555-0107', credential: 'MD' },
 ];
+
+// ============ EXPENSES ============
+export interface Expense {
+  id: number;
+  repId: string;
+  date: string;
+  type: string;
+  amount: number;
+  desc: string;
+  status: 'Pending' | 'Approved' | 'Draft';
+}
+
+export const expenses: Expense[] = [
+  { id: 1, repId: 'u2', date: 'Mar 6', type: 'Meal', amount: 42, desc: 'Lunch with Dr. Osei', status: 'Pending' },
+  { id: 2, repId: 'u2', date: 'Mar 5', type: 'Mileage', amount: 67.50, desc: '101 mi · Tampa route', status: 'Approved' },
+  { id: 3, repId: 'u2', date: 'Mar 4', type: 'Supplies', amount: 24, desc: 'Shipping materials', status: 'Draft' },
+  { id: 4, repId: 'u2', date: 'Mar 3', type: 'Meal', amount: 38, desc: 'Coffee with Dr. Addo', status: 'Approved' },
+  { id: 5, repId: 'u3', date: 'Mar 6', type: 'Meal', amount: 55, desc: 'Dinner with Dr. Cruz', status: 'Pending' },
+  { id: 6, repId: 'u3', date: 'Mar 4', type: 'Mileage', amount: 89, desc: '132 mi · Northeast loop', status: 'Approved' },
+  { id: 7, repId: 'u3', date: 'Mar 2', type: 'Supplies', amount: 31, desc: 'Sample packaging', status: 'Approved' },
+  { id: 8, repId: 'u4', date: 'Mar 5', type: 'Meal', amount: 36, desc: 'Lunch with Dr. Reyes', status: 'Draft' },
+  { id: 9, repId: 'u4', date: 'Mar 3', type: 'Mileage', amount: 45, desc: '67 mi · Chicago route', status: 'Pending' },
+  { id: 10, repId: 'u5', date: 'Mar 6', type: 'Meal', amount: 62, desc: 'Dinner with Dr. Park', status: 'Approved' },
+  { id: 11, repId: 'u5', date: 'Mar 5', type: 'Mileage', amount: 112, desc: '166 mi · West Coast run', status: 'Approved' },
+  { id: 12, repId: 'u5', date: 'Mar 4', type: 'Supplies', amount: 48, desc: 'Demo materials', status: 'Pending' },
+];
+
+// ============ ROUTE STOPS ============
+export interface RouteStop {
+  num: number;
+  repId: string;
+  time: string;
+  name: string;
+  address: string;
+  drive: string | null;
+}
+
+export const routeStops: RouteStop[] = [
+  { num: 1, repId: 'u2', time: '9:00 AM', name: 'Dr. Osei', address: '4812 N Dale Mabry Hwy', drive: null },
+  { num: 2, repId: 'u2', time: '10:30 AM', name: 'Tampa Surgery Ctr', address: '2901 W Swann Ave', drive: '12 min' },
+  { num: 3, repId: 'u2', time: '1:00 PM', name: 'Dr. Webb', address: '509 S Armenia Ave', drive: '8 min' },
+  { num: 4, repId: 'u2', time: '3:00 PM', name: "St. Luke's Hospital", address: '4801 Van Dyke Rd', drive: '22 min' },
+  { num: 1, repId: 'u3', time: '8:30 AM', name: 'Dr. Cruz', address: '120 E 56th St', drive: null },
+  { num: 2, repId: 'u3', time: '10:00 AM', name: 'Boston Med Group', address: '300 Longwood Ave', drive: '18 min' },
+  { num: 3, repId: 'u3', time: '12:30 PM', name: 'Dr. Diallo', address: '55 Fruit St', drive: '10 min' },
+  { num: 1, repId: 'u4', time: '9:30 AM', name: 'Dr. Reyes', address: '680 N Lake Shore Dr', drive: null },
+  { num: 2, repId: 'u4', time: '11:30 AM', name: 'Midwest Clinic', address: '1500 S Michigan Ave', drive: '15 min' },
+  { num: 1, repId: 'u5', time: '9:00 AM', name: 'Dr. Park', address: '233 Sansome St', drive: null },
+  { num: 2, repId: 'u5', time: '11:00 AM', name: 'Pacific Health Ctr', address: '450 Sutter St', drive: '14 min' },
+  { num: 3, repId: 'u5', time: '1:30 PM', name: 'Bay Area Surgical', address: '100 S Ellsworth Ave', drive: '20 min' },
+  { num: 4, repId: 'u5', time: '3:30 PM', name: 'Dr. Tanaka', address: '795 Folsom St', drive: '11 min' },
+];
+
+// ============ QUOTES ============
+export interface Quote {
+  id: string;
+  repId: string;
+  doctor: string;
+  total: number;
+  status: 'Sent' | 'Viewed' | 'Signed' | 'Expired';
+  date: string;
+}
+
+export const quotes: Quote[] = [
+  { id: 'Q-0041', repId: 'u2', doctor: 'Dr. Osei', total: 1528, status: 'Sent', date: 'Mar 6' },
+  { id: 'Q-0040', repId: 'u2', doctor: 'Dr. Park', total: 2880, status: 'Viewed', date: 'Mar 3' },
+  { id: 'Q-0039', repId: 'u2', doctor: "St. Luke's", total: 8460, status: 'Signed', date: 'Feb 28' },
+  { id: 'Q-0038', repId: 'u2', doctor: 'Dr. Cruz', total: 960, status: 'Expired', date: 'Feb 15' },
+  { id: 'Q-0037', repId: 'u3', doctor: 'Dr. Diallo', total: 3200, status: 'Sent', date: 'Mar 5' },
+  { id: 'Q-0036', repId: 'u3', doctor: 'Dr. Cruz', total: 1440, status: 'Signed', date: 'Mar 1' },
+  { id: 'Q-0035', repId: 'u3', doctor: 'Boston Med', total: 5100, status: 'Viewed', date: 'Feb 22' },
+  { id: 'Q-0034', repId: 'u4', doctor: 'Dr. Reyes', total: 2100, status: 'Sent', date: 'Mar 4' },
+  { id: 'Q-0033', repId: 'u4', doctor: 'Midwest Clinic', total: 4500, status: 'Expired', date: 'Feb 10' },
+  { id: 'Q-0032', repId: 'u5', doctor: 'Dr. Park', total: 6200, status: 'Signed', date: 'Mar 6' },
+  { id: 'Q-0031', repId: 'u5', doctor: 'Bay Area Surgical', total: 9800, status: 'Viewed', date: 'Mar 2' },
+  { id: 'Q-0030', repId: 'u5', doctor: 'Dr. Tanaka', total: 1850, status: 'Sent', date: 'Feb 27' },
+];
+
+// ============ CALENDAR EVENTS ============
+export interface CalendarEvent {
+  repId: string;
+  day: string;
+  time: string;
+  title: string;
+  type: string;
+}
+
+export const calendarEvents: CalendarEvent[] = [
+  { repId: 'u2', day: 'Mon', time: '9:00 AM', title: 'Call Dr. Osei', type: 'Call' },
+  { repId: 'u2', day: 'Mon', time: '1:00 PM', title: 'Visit Dr. Webb', type: 'Visit' },
+  { repId: 'u2', day: 'Thu', time: '11:00 AM', title: 'Presentation Tampa Surgery', type: 'Presentation' },
+  { repId: 'u2', day: 'Fri', time: '9:00 AM', title: "Follow-up St. Luke's", type: 'Follow-up' },
+  { repId: 'u3', day: 'Tue', time: '9:30 AM', title: 'Call Dr. Cruz', type: 'Call' },
+  { repId: 'u3', day: 'Wed', time: '2:00 PM', title: 'Visit Boston Med', type: 'Visit' },
+  { repId: 'u3', day: 'Fri', time: '10:00 AM', title: 'Email follow-up Dr. Diallo', type: 'Follow-up' },
+  { repId: 'u4', day: 'Mon', time: '10:00 AM', title: 'Call Dr. Reyes', type: 'Call' },
+  { repId: 'u4', day: 'Wed', time: '3:00 PM', title: 'Visit Midwest Clinic', type: 'Visit' },
+  { repId: 'u5', day: 'Tue', time: '10:00 AM', title: 'Video Demo Dr. Park', type: 'Video Demo' },
+  { repId: 'u5', day: 'Wed', time: '2:00 PM', title: 'Training Session', type: 'Training' },
+  { repId: 'u5', day: 'Thu', time: '1:00 PM', title: 'Visit Bay Area Surgical', type: 'Visit' },
+  { repId: 'u5', day: 'Fri', time: '3:00 PM', title: 'Call Dr. Tanaka', type: 'Call' },
+];
+  { name: 'Dr. Renata Osei', specialty: 'Urology', city: 'Tampa', state: 'FL', npi: '1234567890', practice: 'Urology Associates', phone: '(813) 555-0101', credential: 'MD' },
+  { name: 'Dr. Jin Park', specialty: 'Dermatology', city: 'New York', state: 'NY', npi: '2345678901', practice: 'Park Derm Group', phone: '(212) 555-0102', credential: 'MD' },
+  { name: 'Dr. Marcus Webb', specialty: 'OB/GYN', city: 'Miami', state: 'FL', npi: '3456789012', practice: 'Coastal Women\'s Health', phone: '(305) 555-0103', credential: 'DO' },
+  { name: 'Dr. Elena Cruz', specialty: 'Urology', city: 'San Francisco', state: 'CA', npi: '4567890123', practice: 'Cruz & Associates', phone: '(415) 555-0104', credential: 'MD' },
+  { name: 'Dr. Samuel Addo', specialty: 'Surgery', city: 'Tampa', state: 'FL', npi: '5678901234', practice: 'Tampa Surgery Ctr', phone: '(813) 555-0105', credential: 'MD' },
+  { name: 'Dr. Maria Diallo', specialty: 'Internal Medicine', city: 'Boston', state: 'MA', npi: '6789012345', practice: 'Boston Med Group', phone: '(617) 555-0106', credential: 'MD' },
+  { name: 'Dr. Carlos Reyes', specialty: 'Orthopedics', city: 'Chicago', state: 'IL', npi: '7890123456', practice: 'Reyes Ortho', phone: '(312) 555-0107', credential: 'MD' },
+];

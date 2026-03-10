@@ -2,22 +2,19 @@ import { useState } from 'react';
 import { TopBar } from '@/components/layout/TopBar';
 import { AIInsightCard } from '@/components/shared/AIInsightCard';
 import { StatusBadge } from '@/components/shared/StatusBadge';
-import { products, npiDatabase } from '@/data/mock-data';
-import { Search, Plus, Minus, FileText, Send } from 'lucide-react';
+import { products, quotes as allQuotes } from '@/data/mock-data';
+import { Search, Plus, FileText, Send } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface LineItem { productId: string; name: string; price: number; qty: number; }
-
-const existingQuotes = [
-  { id: 'Q-0041', doctor: 'Dr. Osei', total: 1528, status: 'Sent' as const, date: 'Mar 6' },
-  { id: 'Q-0040', doctor: 'Dr. Park', total: 2880, status: 'Viewed' as const, date: 'Mar 3' },
-  { id: 'Q-0039', doctor: 'St. Luke\'s', total: 8460, status: 'Signed' as const, date: 'Feb 28' },
-  { id: 'Q-0038', doctor: 'Dr. Cruz', total: 960, status: 'Expired' as const, date: 'Feb 15' },
-];
 
 export default function QuoteBuilder() {
   const [building, setBuilding] = useState(false);
   const [items, setItems] = useState<LineItem[]>([]);
   const [discount, setDiscount] = useState(0);
+  const { user } = useAuth();
+
+  const existingQuotes = allQuotes.filter(q => q.repId === user?.id);
 
   const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
   const discountAmt = subtotal * (discount / 100);
