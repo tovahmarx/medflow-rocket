@@ -1,9 +1,11 @@
 import { TopBar } from '@/components/layout/TopBar';
 import { StatusBadge } from '@/components/shared/StatusBadge';
+import { useAuth } from '@/contexts/AuthContext';
 import { orders } from '@/data/mock-data';
 
 export default function OrderHistory() {
-  const myOrders = orders.filter(o => o.doctorId === 'u6');
+  const { user } = useAuth();
+  const myOrders = orders.filter(o => o.doctorId === user?.id);
 
   return (
     <>

@@ -1,12 +1,14 @@
 import { TopBar } from '@/components/layout/TopBar';
 import { StatusBadge } from '@/components/shared/StatusBadge';
+import { useAuth } from '@/contexts/AuthContext';
 import { deals } from '@/data/mock-data';
 import { Sparkles } from 'lucide-react';
 
 const stageOrder = ['Conference Lead', 'Contacted', 'Sample Sent', 'In Evaluation', 'Contract Out', 'Closed Won'];
 
 export default function MyPipeline() {
-  const myDeals = deals.filter(d => d.repId === 'u2');
+  const { user } = useAuth();
+  const myDeals = deals.filter(d => d.repId === user?.id);
 
   return (
     <>

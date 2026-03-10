@@ -3,12 +3,17 @@ import { StatCard } from '@/components/shared/StatCard';
 import { AIInsightCard } from '@/components/shared/AIInsightCard';
 import { AvatarCircle } from '@/components/shared/AvatarCircle';
 import { StatusBadge } from '@/components/shared/StatusBadge';
-import { orders } from '@/data/mock-data';
+import { useAuth } from '@/contexts/AuthContext';
+import { orders, doctorAccounts, users } from '@/data/mock-data';
 import { useNavigate } from 'react-router-dom';
 
 export default function DoctorHome() {
   const navigate = useNavigate();
-  const myOrders = orders.filter(o => o.doctorId === 'u6');
+  const { user } = useAuth();
+  const myOrders = orders.filter(o => o.doctorId === user?.id);
+  const myAccount = doctorAccounts.find(d => d.userId === user?.id);
+  const myRep = myAccount ? users.find(u => u.id === myAccount.assignedRep) : null;
+  const totalSpend = myOrders.reduce((s, o) => s + o.total, 0);
 
   return (
     <>
@@ -20,8 +25,8 @@ export default function DoctorHome() {
         </AIInsightCard>
 
         <div className="grid grid-cols-3 gap-3">
-          <StatCard label="Total Orders" value="4" />
-          <StatCard label="Lifetime Spend" value="$3,952" />
+          <StatCard label="Total Orders" value={String(myOrders.length)} />
+          <StatCard label="Lifetime Spend" value={`$${totalSpend.toLocaleString()}`} />
           <StatCard label="Status" value="Active" className="border-success/20" />
         </div>
 
@@ -43,13 +48,14 @@ export default function DoctorHome() {
           </div>
         </div>
 
+        {myRep && (
         <div className="rounded-lg border bg-card p-4">
           <p className="text-xs text-muted-foreground">Your Rep</p>
           <div className="mt-2 flex items-center gap-3">
-            <AvatarCircle initials="CM" />
+            <AvatarCircle initials={myRep.initials} />
             <div>
-              <p className="text-sm font-medium text-foreground">Clint M.</p>
-              <p className="text-xs text-muted-foreground">Sales Rep · Southeast</p>
+              <p className="text-sm font-medium text-foreground">{myRep.name}</p>
+              <p className="text-xs text-muted-foreground">Sales Rep · {myRep.territory}</p>
             </div>
           </div>
           <div className="mt-3 flex gap-2">
@@ -58,6 +64,7 @@ export default function DoctorHome() {
             <button className="flex-1 rounded-lg bg-primary py-2 text-xs font-medium text-primary-foreground tap-target">Video Demo</button>
           </div>
         </div>
+        )}
       </div>
     </>
   );

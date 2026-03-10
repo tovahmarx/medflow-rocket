@@ -2,6 +2,8 @@ import { TopBar } from '@/components/layout/TopBar';
 import { StatCard } from '@/components/shared/StatCard';
 import { AIInsightCard } from '@/components/shared/AIInsightCard';
 import { StatusBadge } from '@/components/shared/StatusBadge';
+import { useAuth } from '@/contexts/AuthContext';
+import { repPerformance } from '@/data/mock-data';
 
 const monthlyData = [
   { month: 'Jan', value: 28400 },
@@ -17,6 +19,11 @@ const tiers = [
 ];
 
 export default function Commission() {
+  const { user } = useAuth();
+  const perf = repPerformance.find(p => p.userId === user?.id);
+  const revenue = perf?.revenue ?? 0;
+  const target = perf?.quarterlyTarget ?? 300000;
+  const progress = perf?.goalProgress ?? 0;
   return (
     <>
       <TopBar title="Commission" />

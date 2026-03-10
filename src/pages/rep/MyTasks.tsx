@@ -4,6 +4,7 @@ import { AIInsightCard } from '@/components/shared/AIInsightCard';
 import { StatusBadge } from '@/components/shared/StatusBadge';
 import { CadenceRing } from '@/components/shared/CadenceRing';
 import { AvatarCircle } from '@/components/shared/AvatarCircle';
+import { useAuth } from '@/contexts/AuthContext';
 import { repTasks } from '@/data/mock-data';
 import { Phone, Mail, Building, Video, Presentation, Zap, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -24,7 +25,8 @@ const urgencyBorder: Record<string, string> = {
 };
 
 export default function MyTasks() {
-  const [tasks, setTasks] = useState(repTasks.filter(t => t.repId === 'u2'));
+  const { user } = useAuth();
+  const [tasks, setTasks] = useState(repTasks.filter(t => t.repId === user?.id));
 
   const toggle = (id: string) => {
     setTasks(prev => prev.map(t => t.id === id ? { ...t, completed: !t.completed } : t));

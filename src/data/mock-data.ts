@@ -198,6 +198,9 @@ export const repTasks: RepTask[] = [
   { id: 't3', repId: 'u2', doctorName: 'Tampa Surgery Center', practice: 'Tampa Surgery Center', description: 'Send Q3 pricing sheet', time: '10:30 AM', urgency: 'medium', type: 'email', completed: false },
   { id: 't4', repId: 'u2', doctorName: 'Dr. Marcus Webb', practice: 'Coastal Women\'s Health', description: 'OB/GYN cold intro visit', time: '1:00 PM', urgency: 'low', type: 'visit', aiTip: 'First visit. Bring Product Overview deck and sample kit.', completed: false },
   { id: 't5', repId: 'u2', doctorName: 'Dr. Elena Cruz', practice: 'Cruz & Associates', description: '31 days overdue (At Risk, cadence: 10 days)', time: '', urgency: 'high', type: 'auto', completed: false },
+  { id: 't6', repId: 'u3', doctorName: 'Dr. Jin Park', practice: 'Park Derm Group', description: 'Follow up on sample results', time: '9:30 AM', urgency: 'high', type: 'call', aiTip: 'Dr. Park loved the samples. Push for bulk order.', completed: false },
+  { id: 't7', repId: 'u3', doctorName: 'Dr. Elena Cruz', practice: 'Cruz & Associates', description: 'Send clinical study data', time: '11:00 AM', urgency: 'medium', type: 'email', completed: false },
+  { id: 't8', repId: 'u3', doctorName: 'Boston Med Group', practice: 'Boston Med Group', description: 'Intro call with Dr. Diallo', time: '2:00 PM', urgency: 'low', type: 'call', completed: false },
 ];
 
 // ============ NOTIFICATIONS ============

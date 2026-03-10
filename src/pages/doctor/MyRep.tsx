@@ -2,21 +2,26 @@ import { useState } from 'react';
 import { TopBar } from '@/components/layout/TopBar';
 import { AvatarCircle } from '@/components/shared/AvatarCircle';
 import { StatusBadge } from '@/components/shared/StatusBadge';
+import { useAuth } from '@/contexts/AuthContext';
+import { doctorAccounts, users } from '@/data/mock-data';
 import { Phone, Mail, Video, Star, Check } from 'lucide-react';
 
 export default function MyRep() {
+  const { user } = useAuth();
   const [rating, setRating] = useState(5);
   const [feedbackSent, setFeedbackSent] = useState(false);
+  const myAccount = doctorAccounts.find(d => d.userId === user?.id);
+  const rep = myAccount ? users.find(u => u.id === myAccount.assignedRep) : null;
 
   return (
     <>
       <TopBar title="My Rep" />
       <div className="space-y-4 p-4">
-        {/* Rep Card */}
+        {rep && (
         <div className="rounded-lg border bg-card p-4 text-center">
-          <AvatarCircle initials="CM" size="lg" className="mx-auto" />
-          <p className="mt-2 text-base font-semibold text-foreground">Clint M.</p>
-          <p className="text-xs text-muted-foreground">Sales Rep · Southeast</p>
+          <AvatarCircle initials={rep.initials} size="lg" className="mx-auto" />
+          <p className="mt-2 text-base font-semibold text-foreground">{rep.name}</p>
+          <p className="text-xs text-muted-foreground">Sales Rep · {rep.territory}</p>
           <div className="mt-4 flex gap-2">
             <button className="flex flex-1 items-center justify-center gap-1 rounded-lg border py-2.5 text-xs font-medium text-foreground tap-target">
               <Phone className="h-4 w-4" /> Call
@@ -29,6 +34,7 @@ export default function MyRep() {
             </button>
           </div>
         </div>
+        )}
 
         {/* Product Feedback */}
         <div className="rounded-lg border bg-card p-4">
