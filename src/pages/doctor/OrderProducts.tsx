@@ -2,36 +2,14 @@ import { useState } from 'react';
 import { TopBar } from '@/components/layout/TopBar';
 import { AIInsightCard } from '@/components/shared/AIInsightCard';
 import { StatusBadge } from '@/components/shared/StatusBadge';
+import { useCart } from '@/contexts/CartContext';
 import { products } from '@/data/mock-data';
 import { Plus, Minus, ShoppingCart } from 'lucide-react';
 
-interface CartItem {
-  productId: string;
-  name: string;
-  price: number;
-  qty: number;
-}
-
 export default function OrderProducts() {
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const { cart, addToCart, updateQty, clearCart, total } = useCart();
   const [showCheckout, setShowCheckout] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
-
-  const addToCart = (p: typeof products[0], qty: number) => {
-    setCart(prev => {
-      const existing = prev.find(c => c.productId === p.id);
-      if (existing) {
-        return prev.map(c => c.productId === p.id ? { ...c, qty: c.qty + qty } : c);
-      }
-      return [...prev, { productId: p.id, name: p.name, price: p.price, qty }];
-    });
-  };
-
-  const updateQty = (id: string, delta: number) => {
-    setCart(prev => prev.map(c => c.productId === id ? { ...c, qty: Math.max(0, c.qty + delta) } : c).filter(c => c.qty > 0));
-  };
-
-  const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
 
   if (orderPlaced) {
     return (
@@ -43,7 +21,7 @@ export default function OrderProducts() {
           </div>
           <p className="text-lg font-semibold text-foreground">Order #ORD-0092 placed!</p>
           <p className="mt-1 text-sm text-muted-foreground">Estimated delivery: March 12</p>
-          <button onClick={() => { setOrderPlaced(false); setCart([]); setShowCheckout(false); }} className="mt-6 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground tap-target">
+          <button onClick={() => { setOrderPlaced(false); clearCart(); setShowCheckout(false); }} className="mt-6 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground tap-target">
             Continue Shopping
           </button>
         </div>
@@ -97,7 +75,7 @@ export default function OrderProducts() {
           <p className="text-xs font-medium text-primary">Your usual order</p>
           <div className="mt-1 flex items-center justify-between">
             <p className="text-sm text-foreground">24× MedGlide Pro 100mL — $1,152</p>
-            <button onClick={() => addToCart(products[0], 24)} className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground tap-target">Add</button>
+            <button onClick={() => addToCart({ productId: products[0].id, name: products[0].name, price: products[0].price }, 24)} className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground tap-target">Add</button>
           </div>
         </div>
 
@@ -126,7 +104,7 @@ export default function OrderProducts() {
                     <button onClick={() => updateQty(p.id, 1)} className="flex h-8 w-8 items-center justify-center rounded-full border tap-target"><Plus className="h-4 w-4" /></button>
                   </div>
                 ) : (
-                  <button onClick={() => addToCart(p, 1)} className="rounded-lg border px-4 py-2 text-xs font-medium text-foreground tap-target active:bg-muted">Add to Cart</button>
+                  <button onClick={() => addToCart({ productId: p.id, name: p.name, price: p.price })} className="rounded-lg border px-4 py-2 text-xs font-medium text-foreground tap-target active:bg-muted">Add to Cart</button>
                 )}
               </div>
             </div>
