@@ -97,11 +97,27 @@ export interface DoctorAccount {
 }
 
 export const doctorAccounts: DoctorAccount[] = [
+  // Clint's contacts (u2)
   { userId: 'u6', lastContact: '3 days ago', lastContactDays: 3, cadenceStatus: 'green', lifetimeValue: 48000, tier: 'Repeat', assignedRep: 'u2', cadenceRule: 21 },
-  { userId: 'u7', lastContact: 'Today', lastContactDays: 0, cadenceStatus: 'green', lifetimeValue: 92000, tier: 'Top', assignedRep: 'u5', cadenceRule: 14 },
   { userId: 'u8', lastContact: 'Never', lastContactDays: 999, cadenceStatus: 'red', lifetimeValue: 0, tier: 'Cold', assignedRep: 'u2', cadenceRule: 30 },
-  { userId: 'u9', lastContact: '31 days ago', lastContactDays: 31, cadenceStatus: 'red', lifetimeValue: 28000, tier: 'At Risk', assignedRep: 'u3', cadenceRule: 10 },
   { userId: 'u10', lastContact: '8 days ago', lastContactDays: 8, cadenceStatus: 'amber', lifetimeValue: 67000, tier: 'Repeat', assignedRep: 'u2', cadenceRule: 21 },
+  { userId: 'u19', lastContact: '5 days ago', lastContactDays: 5, cadenceStatus: 'green', lifetimeValue: 22000, tier: 'Repeat', assignedRep: 'u2', cadenceRule: 21 },
+  { userId: 'u20', lastContact: '18 days ago', lastContactDays: 18, cadenceStatus: 'amber', lifetimeValue: 15000, tier: 'At Risk', assignedRep: 'u2', cadenceRule: 14 },
+  { userId: 'u21', lastContact: '2 days ago', lastContactDays: 2, cadenceStatus: 'green', lifetimeValue: 34000, tier: 'Repeat', assignedRep: 'u2', cadenceRule: 21 },
+  // Sara's contacts (u3)
+  { userId: 'u9', lastContact: '31 days ago', lastContactDays: 31, cadenceStatus: 'red', lifetimeValue: 28000, tier: 'At Risk', assignedRep: 'u3', cadenceRule: 10 },
+  { userId: 'u11', lastContact: '2 days ago', lastContactDays: 2, cadenceStatus: 'green', lifetimeValue: 85000, tier: 'Top', assignedRep: 'u3', cadenceRule: 14 },
+  { userId: 'u12', lastContact: '6 days ago', lastContactDays: 6, cadenceStatus: 'green', lifetimeValue: 41000, tier: 'Repeat', assignedRep: 'u3', cadenceRule: 21 },
+  { userId: 'u13', lastContact: '1 day ago', lastContactDays: 1, cadenceStatus: 'green', lifetimeValue: 120000, tier: 'Top', assignedRep: 'u3', cadenceRule: 14 },
+  { userId: 'u14', lastContact: '25 days ago', lastContactDays: 25, cadenceStatus: 'red', lifetimeValue: 18000, tier: 'Cold', assignedRep: 'u3', cadenceRule: 21 },
+  // James's contacts (u4)
+  { userId: 'u16', lastContact: '4 days ago', lastContactDays: 4, cadenceStatus: 'green', lifetimeValue: 55000, tier: 'Repeat', assignedRep: 'u4', cadenceRule: 21 },
+  { userId: 'u17', lastContact: '12 days ago', lastContactDays: 12, cadenceStatus: 'amber', lifetimeValue: 72000, tier: 'Top', assignedRep: 'u4', cadenceRule: 10 },
+  { userId: 'u14', lastContact: '25 days ago', lastContactDays: 25, cadenceStatus: 'red', lifetimeValue: 18000, tier: 'Cold', assignedRep: 'u4', cadenceRule: 21 },
+  // Priya's contacts (u5)
+  { userId: 'u7', lastContact: 'Today', lastContactDays: 0, cadenceStatus: 'green', lifetimeValue: 92000, tier: 'Top', assignedRep: 'u5', cadenceRule: 14 },
+  { userId: 'u15', lastContact: '9 days ago', lastContactDays: 9, cadenceStatus: 'amber', lifetimeValue: 38000, tier: 'Repeat', assignedRep: 'u5', cadenceRule: 10 },
+  { userId: 'u18', lastContact: '7 days ago', lastContactDays: 7, cadenceStatus: 'green', lifetimeValue: 45000, tier: 'Repeat', assignedRep: 'u5', cadenceRule: 14 },
 ];
 
 // ============ PIPELINE ============
