@@ -11,7 +11,7 @@ import { Search, Plus } from 'lucide-react';
 const filters = ['All', 'Top', 'Repeat', 'At Risk', 'Cold', 'Overdue'];
 
 export default function DoctorAccounts() {
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
