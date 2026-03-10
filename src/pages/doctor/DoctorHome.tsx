@@ -64,6 +64,7 @@ export default function DoctorHome() {
             <button className="flex-1 rounded-lg bg-primary py-2 text-xs font-medium text-primary-foreground tap-target">Video Demo</button>
           </div>
         </div>
+        )}
       </div>
     </>
   );
