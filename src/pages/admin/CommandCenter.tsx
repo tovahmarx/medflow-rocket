@@ -36,13 +36,13 @@ export default function CommandCenter() {
             </AIInsightCard>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
               <StatCard label="Total Pipeline" value="$8.9M" trend="up" trendValue="8%" />
               <StatCard label="Revenue MTD" value="$124K" trend="up" trendValue="12%" />
-              <StatCard label="Orders This Month" value="18" trend="up" trendValue="3" />
+              <StatCard label="Orders" value="18" trend="up" trendValue="3" />
               <StatCard label="Active Reps" value="4" />
               <StatCard label="Close Rate" value="34%" trend="up" trendValue="2%" />
-              <StatCard label="Avg Deal Size" value="$42K" trend="down" trendValue="5%" />
+              <StatCard label="Avg Deal" value="$42K" trend="down" trendValue="5%" />
             </div>
 
             {/* Revenue Chart */}
@@ -76,7 +76,7 @@ export default function CommandCenter() {
                   const w = Math.max(20, (s.value / maxVal) * 100);
                   return (
                     <div key={s.name} className="flex items-center gap-3">
-                      <span className="w-28 flex-shrink-0 text-xs text-muted-foreground">{s.name}</span>
+                      <span className="w-20 flex-shrink-0 truncate text-xs text-muted-foreground sm:w-28">{s.name}</span>
                       <div className="flex-1 min-w-0">
                         <div className="h-6 rounded-sm bg-primary/10">
                           <div
@@ -107,9 +107,9 @@ export default function CommandCenter() {
               <h3 className="mb-3 text-sm font-semibold text-foreground">Inventory Alerts</h3>
               <div className="space-y-2">
                 {products.filter(p => p.status !== 'OK').map(p => (
-                  <div key={p.id} className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm text-foreground">{p.name}</p>
+                  <div key={p.id} className="flex items-center justify-between gap-2">
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm text-foreground">{p.name}</p>
                       <p className="text-xs text-muted-foreground">{p.stock} units</p>
                     </div>
                     <StatusBadge variant={p.status === 'Critical' ? 'danger' : 'warning'}>{p.status}</StatusBadge>
