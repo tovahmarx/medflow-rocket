@@ -4,6 +4,7 @@ import { reps, users, products } from '@/data/mock-data';
 import { AvatarCircle } from '@/components/shared/AvatarCircle';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTour } from '@/contexts/TourContext';
 
 const sections = [
   {
