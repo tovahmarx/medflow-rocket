@@ -127,6 +127,7 @@ function AuthenticatedRoutes() {
         </Route>
 
         {/* Doctor Routes */}
+        <Route element={<RoleGuard allowedRole="doctor" />}>
         <Route path="/doctor" element={<DoctorShell />}>
           <Route index element={<DoctorHome />} />
           <Route path="order" element={<OrderProducts />} />
