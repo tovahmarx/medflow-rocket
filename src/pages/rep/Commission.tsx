@@ -2,6 +2,8 @@ import { TopBar } from '@/components/layout/TopBar';
 import { StatCard } from '@/components/shared/StatCard';
 import { AIInsightCard } from '@/components/shared/AIInsightCard';
 import { StatusBadge } from '@/components/shared/StatusBadge';
+import { useAuth } from '@/contexts/AuthContext';
+import { repPerformance } from '@/data/mock-data';
 
 const monthlyData = [
   { month: 'Jan', value: 28400 },
