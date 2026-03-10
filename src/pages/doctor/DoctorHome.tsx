@@ -3,12 +3,17 @@ import { StatCard } from '@/components/shared/StatCard';
 import { AIInsightCard } from '@/components/shared/AIInsightCard';
 import { AvatarCircle } from '@/components/shared/AvatarCircle';
 import { StatusBadge } from '@/components/shared/StatusBadge';
-import { orders } from '@/data/mock-data';
+import { useAuth } from '@/contexts/AuthContext';
+import { orders, doctorAccounts, users } from '@/data/mock-data';
 import { useNavigate } from 'react-router-dom';
 
 export default function DoctorHome() {
   const navigate = useNavigate();
-  const myOrders = orders.filter(o => o.doctorId === 'u6');
+  const { user } = useAuth();
+  const myOrders = orders.filter(o => o.doctorId === user?.id);
+  const myAccount = doctorAccounts.find(d => d.userId === user?.id);
+  const myRep = myAccount ? users.find(u => u.id === myAccount.assignedRep) : null;
+  const totalSpend = myOrders.reduce((s, o) => s + o.total, 0);
 
   return (
     <>
