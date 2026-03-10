@@ -30,6 +30,7 @@ export function BottomTabBar({ tabs, moreItems }: BottomTabBarProps) {
 
   const isActive = (path: string) => {
     if (path === '__more__') return moreItems.some(m => location.pathname.startsWith(m.path));
+    if (path === '/rep' || path === '/admin' || path === '/doctor') return location.pathname === path;
     return location.pathname.startsWith(path);
   };
 
