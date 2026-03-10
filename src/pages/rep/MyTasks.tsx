@@ -4,6 +4,7 @@ import { AIInsightCard } from '@/components/shared/AIInsightCard';
 import { StatusBadge } from '@/components/shared/StatusBadge';
 import { CadenceRing } from '@/components/shared/CadenceRing';
 import { AvatarCircle } from '@/components/shared/AvatarCircle';
+import { useAuth } from '@/contexts/AuthContext';
 import { repTasks } from '@/data/mock-data';
 import { Phone, Mail, Building, Video, Presentation, Zap, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
