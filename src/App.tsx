@@ -124,6 +124,7 @@ function AuthenticatedRoutes() {
           <Route path="settings" element={<Settings />} />
           <Route path="help" element={<HelpSupport />} />
         </Route>
+        </Route>
 
         {/* Doctor Routes */}
         <Route path="/doctor" element={<DoctorShell />}>
