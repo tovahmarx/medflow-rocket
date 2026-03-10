@@ -4,15 +4,17 @@ import { FilterBar } from '@/components/shared/FilterBar';
 import { CadenceRing } from '@/components/shared/CadenceRing';
 import { AvatarCircle } from '@/components/shared/AvatarCircle';
 import { StatusBadge } from '@/components/shared/StatusBadge';
+import { useAuth } from '@/contexts/AuthContext';
 import { doctorAccounts, users } from '@/data/mock-data';
 import { Phone, Mail, Video, Search } from 'lucide-react';
 
 const filters = ['All', 'Top', 'Repeat', 'At Risk', 'Cold', 'Overdue'];
 
 export default function MyContacts() {
+  const { user } = useAuth();
   const [activeFilter, setActiveFilter] = useState('All');
 
-  const myDoctors = doctorAccounts.filter(d => d.assignedRep === 'u2');
+  const myDoctors = doctorAccounts.filter(d => d.assignedRep === user?.id);
   const filtered = myDoctors.filter(d => {
     if (activeFilter === 'All') return true;
     if (activeFilter === 'Overdue') return d.cadenceStatus === 'red';

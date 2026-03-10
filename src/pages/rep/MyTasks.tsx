@@ -25,7 +25,8 @@ const urgencyBorder: Record<string, string> = {
 };
 
 export default function MyTasks() {
-  const [tasks, setTasks] = useState(repTasks.filter(t => t.repId === 'u2'));
+  const { user } = useAuth();
+  const [tasks, setTasks] = useState(repTasks.filter(t => t.repId === user?.id));
 
   const toggle = (id: string) => {
     setTasks(prev => prev.map(t => t.id === id ? { ...t, completed: !t.completed } : t));
