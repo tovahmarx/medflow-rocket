@@ -3,12 +3,12 @@ import { cn } from '@/lib/utils';
 type BadgeVariant = 'success' | 'warning' | 'danger' | 'info' | 'neutral' | 'offline';
 
 const variantStyles: Record<BadgeVariant, string> = {
-  success: 'bg-success/10 text-success',
-  warning: 'bg-warning/10 text-warning',
-  danger: 'bg-destructive/10 text-destructive',
-  info: 'bg-info/10 text-info',
-  neutral: 'bg-muted text-muted-foreground',
-  offline: 'bg-offline/10 text-offline',
+  success: 'bg-success/10 text-success border border-success/20',
+  warning: 'bg-warning/10 text-warning border border-warning/20',
+  danger: 'bg-destructive/10 text-destructive border border-destructive/20',
+  info: 'bg-info/10 text-info border border-info/20',
+  neutral: 'bg-muted text-muted-foreground border border-border',
+  offline: 'bg-offline/10 text-offline border border-offline/20',
 };
 
 interface StatusBadgeProps {

@@ -11,7 +11,7 @@ interface StatCardProps {
 
 export function StatCard({ label, value, trend, trendValue, className }: StatCardProps) {
   return (
-    <div className={cn('rounded-lg border bg-card p-4', className)}>
+    <div className={cn('rounded-lg border bg-card p-4 shadow-sm hover:shadow-md transition-all duration-200', className)}>
       <p className="text-xs font-medium text-muted-foreground">{label}</p>
       <div className="mt-1 flex items-end gap-2">
         <span className="text-2xl font-semibold text-foreground">{value}</span>

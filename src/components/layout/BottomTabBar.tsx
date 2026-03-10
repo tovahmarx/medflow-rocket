@@ -35,7 +35,7 @@ export function BottomTabBar({ tabs, moreItems }: BottomTabBarProps) {
 
   return (
     <>
-      <nav className="fixed bottom-0 left-0 right-0 z-30 border-t bg-background md:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 z-30 bg-background/80 shadow-[0_-1px_6px_0_rgba(0,0,0,0.06)] backdrop-blur-xl md:hidden">
         <div className="flex items-stretch">
           {allTabs.map(tab => (
             <button

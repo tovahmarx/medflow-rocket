@@ -29,8 +29,8 @@ export function DesktopSidebar({ tabs, moreItems }: DesktopSidebarProps) {
             key={item.label}
             onClick={() => navigate(item.path)}
             className={cn(
-              'flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium tap-target',
-              isActive(item.path) ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-muted'
+              'flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium tap-target transition-colors duration-150',
+              isActive(item.path) ? 'bg-primary/10 text-primary border-l-2 border-l-primary' : 'text-muted-foreground hover:bg-muted'
             )}
           >
             <item.icon className="h-4 w-4" />

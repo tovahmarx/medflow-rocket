@@ -42,7 +42,7 @@ export function TopBar({ title }: { title: string }) {
 
   return (
     <>
-      <header className="sticky top-0 z-30 flex items-center justify-between border-b bg-background px-4 py-3">
+      <header className="sticky top-0 z-30 flex items-center justify-between bg-background/80 px-4 py-3 shadow-sm backdrop-blur-xl">
         <h1 className="text-lg font-bold text-foreground">{title}</h1>
         <div className="flex items-center gap-1">
           <button onClick={() => setShowSearch(true)} className="rounded-full p-2 hover:bg-muted tap-target">
