@@ -131,6 +131,14 @@ export const deals: Deal[] = [
   { id: 'd6', doctorName: 'Dr. Reyes', doctorId: '', practice: 'Reyes Medical', value: 40000, stage: 'Conference Lead', daysInStage: 3, winProbability: 22, repId: 'u2' },
   { id: 'd7', doctorName: 'Dr. Hill', doctorId: '', practice: 'Hill Clinic', value: 28000, stage: 'Conference Lead', daysInStage: 7, winProbability: 18, repId: 'u2' },
   { id: 'd8', doctorName: 'Dr. Chen', doctorId: '', practice: 'Chen Practice', value: 32000, stage: 'Contacted', daysInStage: 5, winProbability: 41, repId: 'u2' },
+  { id: 'd9', doctorName: 'Dr. Rao', doctorId: '', practice: 'Rao Ortho Group', value: 95000, stage: 'In Evaluation', daysInStage: 8, winProbability: 65, repId: 'u3', aiFlag: 'High engagement on last visit. Push for trial.' },
+  { id: 'd10', doctorName: 'Dr. Diallo', doctorId: '', practice: 'Boston Med Group', value: 48000, stage: 'Sample Sent', daysInStage: 5, winProbability: 52, repId: 'u3' },
+  { id: 'd11', doctorName: 'Dr. Kim', doctorId: '', practice: 'Kim Cardiology', value: 135000, stage: 'Contract Out', daysInStage: 2, winProbability: 88, repId: 'u3' },
+  { id: 'd12', doctorName: 'Dr. Foster', doctorId: '', practice: 'Foster Family Medicine', value: 35000, stage: 'Conference Lead', daysInStage: 4, winProbability: 20, repId: 'u3' },
+  { id: 'd13', doctorName: 'Dr. Tanaka', doctorId: '', practice: 'Tanaka ENT', value: 62000, stage: 'Contacted', daysInStage: 9, winProbability: 38, repId: 'u3' },
+  { id: 'd14', doctorName: 'Dr. Nguyen', doctorId: '', practice: 'Nguyen Internal Med', value: 78000, stage: 'In Evaluation', daysInStage: 3, winProbability: 60, repId: 'u4' },
+  { id: 'd15', doctorName: 'Dr. Adams', doctorId: '', practice: 'Adams Surgical', value: 110000, stage: 'Sample Sent', daysInStage: 11, winProbability: 45, repId: 'u4', aiFlag: '11 days in stage. Follow up recommended.' },
+  { id: 'd16', doctorName: 'Dr. Patel', doctorId: '', practice: 'Patel Dermatology', value: 42000, stage: 'Contacted', daysInStage: 6, winProbability: 33, repId: 'u5' },
 ];
 
 // ============ ORDERS ============
