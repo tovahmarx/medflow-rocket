@@ -136,7 +136,7 @@ export default function Settings() {
     <>
       <TopBar title="Settings" />
       <div className="space-y-2 p-4">
-        {sections.map(s => (
+        {allSections.map(s => (
           <div key={s.title} className="rounded-lg border bg-card">
             <button onClick={() => toggle(s.title)} className="flex w-full items-center justify-between p-4 tap-target">
               <p className="text-sm font-semibold text-foreground">{s.title}</p>
