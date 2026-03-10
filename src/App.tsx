@@ -74,6 +74,7 @@ function AuthenticatedRoutes() {
         <Route path="/" element={<Navigate to={homeRedirect} replace />} />
 
         {/* Admin Routes */}
+        <Route element={<RoleGuard allowedRole="admin" />}>
         <Route path="/admin" element={<AdminShell />}>
           <Route index element={<CommandCenter />} />
           <Route path="reps" element={<SalesReps />} />
