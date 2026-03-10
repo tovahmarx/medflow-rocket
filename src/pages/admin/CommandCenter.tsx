@@ -36,13 +36,13 @@ export default function CommandCenter() {
             </AIInsightCard>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
               <StatCard label="Total Pipeline" value="$8.9M" trend="up" trendValue="8%" />
               <StatCard label="Revenue MTD" value="$124K" trend="up" trendValue="12%" />
-              <StatCard label="Orders This Month" value="18" trend="up" trendValue="3" />
+              <StatCard label="Orders" value="18" trend="up" trendValue="3" />
               <StatCard label="Active Reps" value="4" />
               <StatCard label="Close Rate" value="34%" trend="up" trendValue="2%" />
-              <StatCard label="Avg Deal Size" value="$42K" trend="down" trendValue="5%" />
+              <StatCard label="Avg Deal" value="$42K" trend="down" trendValue="5%" />
             </div>
 
             {/* Revenue Chart */}
