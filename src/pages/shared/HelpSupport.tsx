@@ -2,16 +2,33 @@ import { useState } from 'react';
 import { TopBar } from '@/components/layout/TopBar';
 import { ChevronDown, ChevronUp, MessageSquare, Bug, Mail } from 'lucide-react';
 import { useTour } from '@/contexts/TourContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { UserRole } from '@/data/mock-data';
 
-const faqs = [
-  { q: 'How do I add a new doctor?', a: 'Go to Doctors → tap the + button. Use NPI search to auto-fill doctor details, then assign a rep and set the cadence tier.' },
-  { q: 'How does the cadence system work?', a: 'Each doctor tier has a contact frequency rule (e.g., Top = 14 days). The CadenceRing turns amber at 80% and red at 100% of the interval.' },
-  { q: 'How are commission tiers calculated?', a: 'Tier 1 (8%) applies to $0–$20K, Tier 2 (10%) to $20K–$50K, and Tier 3 (13%) to $50K+. All tiers are configurable in Settings.' },
-  { q: 'What triggers an approval request?', a: 'Deals over $100K, discounts above 5%, expenses over $50, and new content uploads all require admin approval.' },
-  { q: 'How does AI lead scoring work?', a: 'Leads are scored based on NPI specialty match, conference engagement, interest rating, and historical conversion data for similar profiles.' },
-  { q: 'Can I export compliance data?', a: 'Yes. Go to Compliance → CMS Export to download all Sunshine Act entries in the required CMS format.' },
-  { q: 'How do I restart the onboarding tour?', a: 'Go to Settings → Onboarding Tour → Restart, or tap the button below.' },
-];
+const faqsByRole: Record<UserRole, { q: string; a: string }[]> = {
+  admin: [
+    { q: 'How do I add a new doctor?', a: 'Go to Doctors → tap the + button. Use NPI search to auto-fill doctor details, then assign a rep and set the cadence tier.' },
+    { q: 'How does the cadence system work?', a: 'Each doctor tier has a contact frequency rule (e.g., Top = 14 days). The CadenceRing turns amber at 80% and red at 100% of the interval.' },
+    { q: 'How are commission tiers calculated?', a: 'Tier 1 (8%) applies to $0–$20K, Tier 2 (10%) to $20K–$50K, and Tier 3 (13%) to $50K+. All tiers are configurable in Settings.' },
+    { q: 'What triggers an approval request?', a: 'Deals over $100K, discounts above 5%, expenses over $50, and new content uploads all require admin approval.' },
+    { q: 'Can I export compliance data?', a: 'Yes. Go to Compliance → CMS Export to download all Sunshine Act entries in the required CMS format.' },
+    { q: 'How do I restart the onboarding tour?', a: 'Go to Settings → Onboarding Tour → Restart, or tap the button below.' },
+  ],
+  rep: [
+    { q: 'How do I log a visit?', a: 'Go to My Contacts → select a doctor → tap "Log Visit" to record your call details and next steps.' },
+    { q: 'How does AI lead scoring work?', a: 'Leads are scored based on NPI specialty match, conference engagement, interest rating, and historical conversion data for similar profiles.' },
+    { q: 'How are my commissions calculated?', a: 'Tier 1 (8%) applies to $0–$20K, Tier 2 (10%) to $20K–$50K, and Tier 3 (13%) to $50K+. Check the Commission page for your current earnings.' },
+    { q: 'How do I submit an expense?', a: 'Go to Expense Tracker → tap + to add a new expense. Attach a receipt photo and it will be sent for admin approval.' },
+    { q: 'How do I restart the onboarding tour?', a: 'Go to Settings → Onboarding Tour → Restart, or tap the button below.' },
+  ],
+  doctor: [
+    { q: 'How do I place an order?', a: 'Go to Order → browse or search products → add items to your cart → review and submit your order.' },
+    { q: 'How do I track my order?', a: 'Go to History to see all past and pending orders with real-time status updates.' },
+    { q: 'How do I contact my rep?', a: 'Go to My Rep to see your assigned representative\'s contact details and send them a message.' },
+    { q: 'Where can I find product training materials?', a: 'Go to Learn to access product guides, videos, and educational resources curated by your rep.' },
+    { q: 'How do I update my profile?', a: 'Contact your sales representative to update your account details and preferences.' },
+  ],
+};
 
 export default function HelpSupport() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
