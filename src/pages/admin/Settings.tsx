@@ -105,9 +105,7 @@ const sections = [
   },
   {
     title: 'Onboarding Tour',
-    content: () => (
-      <button className="rounded-lg border py-3 w-full text-sm font-medium text-foreground tap-target">Restart Onboarding Tour</button>
-    ),
+    content: () => <OnboardingButton />,
   },
 ];
 
