@@ -26,6 +26,17 @@ export const users: User[] = [
   { id: 'u8', name: 'Dr. Marcus Webb', initials: 'MW', email: 'mwebb@coastalwh.com', role: 'doctor', specialty: 'OB/GYN', practice: 'Coastal Women\'s Health', npi: '3456789012', phone: '(305) 555-0103' },
   { id: 'u9', name: 'Dr. Elena Cruz', initials: 'EC', email: 'ecruz@cruzassoc.com', role: 'doctor', specialty: 'Urology', practice: 'Cruz & Associates', npi: '4567890123', phone: '(415) 555-0104' },
   { id: 'u10', name: 'Dr. Samuel Addo', initials: 'SA', email: 'saddo@tampasurg.com', role: 'doctor', specialty: 'Surgery', practice: 'Tampa Surgery Ctr', npi: '5678901234', phone: '(813) 555-0105' },
+  { id: 'u11', name: 'Dr. Anika Rao', initials: 'AR', email: 'arao@raoortho.com', role: 'doctor', specialty: 'Orthopedics', practice: 'Rao Ortho Group', npi: '6789012345', phone: '(617) 555-0106' },
+  { id: 'u12', name: 'Dr. Kwame Diallo', initials: 'KD', email: 'kdiallo@bostonmed.com', role: 'doctor', specialty: 'Internal Medicine', practice: 'Boston Med Group', npi: '7890123456', phone: '(617) 555-0107' },
+  { id: 'u13', name: 'Dr. Lisa Kim', initials: 'LK', email: 'lkim@kimcardio.com', role: 'doctor', specialty: 'Cardiology', practice: 'Kim Cardiology', npi: '8901234567', phone: '(212) 555-0108' },
+  { id: 'u14', name: 'Dr. David Foster', initials: 'DF', email: 'dfoster@fosterfm.com', role: 'doctor', specialty: 'Family Medicine', practice: 'Foster Family Med', npi: '9012345678', phone: '(312) 555-0109' },
+  { id: 'u15', name: 'Dr. Yuki Tanaka', initials: 'YT', email: 'ytanaka@tanakaent.com', role: 'doctor', specialty: 'ENT', practice: 'Tanaka ENT', npi: '0123456789', phone: '(503) 555-0110' },
+  { id: 'u16', name: 'Dr. Huy Nguyen', initials: 'HN', email: 'hnguyen@nguyenim.com', role: 'doctor', specialty: 'Internal Medicine', practice: 'Nguyen Internal Med', npi: '1122334455', phone: '(312) 555-0111' },
+  { id: 'u17', name: 'Dr. Rachel Adams', initials: 'RA', email: 'radams@adamssurg.com', role: 'doctor', specialty: 'Surgery', practice: 'Adams Surgical', npi: '2233445566', phone: '(312) 555-0112' },
+  { id: 'u18', name: 'Dr. Vikram Patel', initials: 'VP', email: 'vpatel@patelderm.com', role: 'doctor', specialty: 'Dermatology', practice: 'Patel Dermatology', npi: '3344556677', phone: '(415) 555-0113' },
+  { id: 'u19', name: 'Dr. Maria Reyes', initials: 'MR', email: 'mreyes@reyesmed.com', role: 'doctor', specialty: 'Internal Medicine', practice: 'Reyes Medical', npi: '4455667788', phone: '(813) 555-0114' },
+  { id: 'u20', name: 'Dr. Thomas Hill', initials: 'TH', email: 'thill@hillclinic.com', role: 'doctor', specialty: 'Urology', practice: 'Hill Clinic', npi: '5566778899', phone: '(813) 555-0115' },
+  { id: 'u21', name: 'Dr. Wei Chen', initials: 'WC', email: 'wchen@chenpractice.com', role: 'doctor', specialty: 'Gastroenterology', practice: 'Chen Practice', npi: '6677889900', phone: '(813) 555-0116' },
 ];
 
 export const reps = users.filter(u => u.role === 'rep');
@@ -86,11 +97,27 @@ export interface DoctorAccount {
 }
 
 export const doctorAccounts: DoctorAccount[] = [
+  // Clint's contacts (u2)
   { userId: 'u6', lastContact: '3 days ago', lastContactDays: 3, cadenceStatus: 'green', lifetimeValue: 48000, tier: 'Repeat', assignedRep: 'u2', cadenceRule: 21 },
-  { userId: 'u7', lastContact: 'Today', lastContactDays: 0, cadenceStatus: 'green', lifetimeValue: 92000, tier: 'Top', assignedRep: 'u5', cadenceRule: 14 },
   { userId: 'u8', lastContact: 'Never', lastContactDays: 999, cadenceStatus: 'red', lifetimeValue: 0, tier: 'Cold', assignedRep: 'u2', cadenceRule: 30 },
-  { userId: 'u9', lastContact: '31 days ago', lastContactDays: 31, cadenceStatus: 'red', lifetimeValue: 28000, tier: 'At Risk', assignedRep: 'u3', cadenceRule: 10 },
   { userId: 'u10', lastContact: '8 days ago', lastContactDays: 8, cadenceStatus: 'amber', lifetimeValue: 67000, tier: 'Repeat', assignedRep: 'u2', cadenceRule: 21 },
+  { userId: 'u19', lastContact: '5 days ago', lastContactDays: 5, cadenceStatus: 'green', lifetimeValue: 22000, tier: 'Repeat', assignedRep: 'u2', cadenceRule: 21 },
+  { userId: 'u20', lastContact: '18 days ago', lastContactDays: 18, cadenceStatus: 'amber', lifetimeValue: 15000, tier: 'At Risk', assignedRep: 'u2', cadenceRule: 14 },
+  { userId: 'u21', lastContact: '2 days ago', lastContactDays: 2, cadenceStatus: 'green', lifetimeValue: 34000, tier: 'Repeat', assignedRep: 'u2', cadenceRule: 21 },
+  // Sara's contacts (u3)
+  { userId: 'u9', lastContact: '31 days ago', lastContactDays: 31, cadenceStatus: 'red', lifetimeValue: 28000, tier: 'At Risk', assignedRep: 'u3', cadenceRule: 10 },
+  { userId: 'u11', lastContact: '2 days ago', lastContactDays: 2, cadenceStatus: 'green', lifetimeValue: 85000, tier: 'Top', assignedRep: 'u3', cadenceRule: 14 },
+  { userId: 'u12', lastContact: '6 days ago', lastContactDays: 6, cadenceStatus: 'green', lifetimeValue: 41000, tier: 'Repeat', assignedRep: 'u3', cadenceRule: 21 },
+  { userId: 'u13', lastContact: '1 day ago', lastContactDays: 1, cadenceStatus: 'green', lifetimeValue: 120000, tier: 'Top', assignedRep: 'u3', cadenceRule: 14 },
+  { userId: 'u14', lastContact: '25 days ago', lastContactDays: 25, cadenceStatus: 'red', lifetimeValue: 18000, tier: 'Cold', assignedRep: 'u3', cadenceRule: 21 },
+  // James's contacts (u4)
+  { userId: 'u16', lastContact: '4 days ago', lastContactDays: 4, cadenceStatus: 'green', lifetimeValue: 55000, tier: 'Repeat', assignedRep: 'u4', cadenceRule: 21 },
+  { userId: 'u17', lastContact: '12 days ago', lastContactDays: 12, cadenceStatus: 'amber', lifetimeValue: 72000, tier: 'Top', assignedRep: 'u4', cadenceRule: 10 },
+  { userId: 'u14', lastContact: '25 days ago', lastContactDays: 25, cadenceStatus: 'red', lifetimeValue: 18000, tier: 'Cold', assignedRep: 'u4', cadenceRule: 21 },
+  // Priya's contacts (u5)
+  { userId: 'u7', lastContact: 'Today', lastContactDays: 0, cadenceStatus: 'green', lifetimeValue: 92000, tier: 'Top', assignedRep: 'u5', cadenceRule: 14 },
+  { userId: 'u15', lastContact: '9 days ago', lastContactDays: 9, cadenceStatus: 'amber', lifetimeValue: 38000, tier: 'Repeat', assignedRep: 'u5', cadenceRule: 10 },
+  { userId: 'u18', lastContact: '7 days ago', lastContactDays: 7, cadenceStatus: 'green', lifetimeValue: 45000, tier: 'Repeat', assignedRep: 'u5', cadenceRule: 14 },
 ];
 
 // ============ PIPELINE ============
