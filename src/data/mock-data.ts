@@ -210,17 +210,30 @@ export interface Notification {
   icon: 'destructive' | 'success' | 'warning' | 'info' | 'offline';
   time: string;
   read: boolean;
+  forRole: UserRole;
+  forUserId?: string;
 }
 
 export const notifications: Notification[] = [
-  { id: 'n1', text: 'MedGlide Sterile Single Use — CRITICAL stock (12 units)', icon: 'destructive', time: '2m ago', read: false },
-  { id: 'n2', text: 'Dr. Jin Park placed an order — 30 units MedGlide Pro', icon: 'success', time: '15m ago', read: false },
-  { id: 'n3', text: 'Dr. Elena Cruz going cold — no contact in 31 days', icon: 'warning', time: '1h ago', read: false },
-  { id: 'n4', text: 'James R. — no activity logged in 24 hours', icon: 'offline', time: '2h ago', read: true },
-  { id: 'n5', text: 'Clint M. submitted expense — $42 lunch with Dr. Osei', icon: 'info', time: '3h ago', read: true },
-  { id: 'n6', text: '3 Top-tier doctors overdue for contact', icon: 'destructive', time: '4h ago', read: true },
-  { id: 'n7', text: 'Priya N. hit 75% of Q1 revenue target', icon: 'success', time: '5h ago', read: true },
-  { id: 'n8', text: 'Product Overview deck expires in 7 days', icon: 'warning', time: '6h ago', read: true },
+  // Admin-only
+  { id: 'n1', text: 'MedGlide Sterile Single Use — CRITICAL stock (12 units)', icon: 'destructive', time: '2m ago', read: false, forRole: 'admin' },
+  { id: 'n4', text: 'James R. — no activity logged in 24 hours', icon: 'offline', time: '2h ago', read: true, forRole: 'admin' },
+  { id: 'n5', text: 'Clint M. submitted expense — $42 lunch with Dr. Osei', icon: 'info', time: '3h ago', read: true, forRole: 'admin' },
+  { id: 'n6', text: '3 Top-tier doctors overdue for contact', icon: 'destructive', time: '4h ago', read: true, forRole: 'admin' },
+  { id: 'n7', text: 'Priya N. hit 75% of Q1 revenue target', icon: 'success', time: '5h ago', read: true, forRole: 'admin' },
+  { id: 'n8', text: 'Product Overview deck expires in 7 days', icon: 'warning', time: '6h ago', read: true, forRole: 'admin' },
+  // Rep — Clint
+  { id: 'n10', text: 'Dr. Jin Park placed an order — 30 units MedGlide Pro', icon: 'success', time: '15m ago', read: false, forRole: 'rep', forUserId: 'u2' },
+  { id: 'n11', text: 'Dr. Elena Cruz going cold — no contact in 31 days', icon: 'warning', time: '1h ago', read: false, forRole: 'rep', forUserId: 'u2' },
+  { id: 'n12', text: 'New training module available: Objection Handling 201', icon: 'info', time: '3h ago', read: true, forRole: 'rep', forUserId: 'u2' },
+  // Rep — Sara
+  { id: 'n13', text: 'Dr. Anika Rao requested a quote', icon: 'success', time: '20m ago', read: false, forRole: 'rep', forUserId: 'u3' },
+  { id: 'n14', text: 'Route updated — 2 new stops added for tomorrow', icon: 'info', time: '2h ago', read: true, forRole: 'rep', forUserId: 'u3' },
+  // Doctor — Dr. Osei
+  { id: 'n20', text: 'Your order #1042 has shipped', icon: 'success', time: '10m ago', read: false, forRole: 'doctor', forUserId: 'u5' },
+  { id: 'n21', text: 'New product guide available: MedGlide Pro tips', icon: 'info', time: '1h ago', read: true, forRole: 'doctor', forUserId: 'u5' },
+  // Doctor — Dr. Park
+  { id: 'n22', text: 'Your rep Clint M. shared a new brochure', icon: 'info', time: '30m ago', read: false, forRole: 'doctor', forUserId: 'u6' },
 ];
 
 // ============ APPROVALS ============
