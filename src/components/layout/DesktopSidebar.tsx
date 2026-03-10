@@ -13,7 +13,13 @@ export function DesktopSidebar({ tabs, moreItems }: DesktopSidebarProps) {
   const navigate = useNavigate();
 
   const allItems = [...tabs, ...moreItems];
-  const isActive = (path: string) => location.pathname.startsWith(path);
+  const isActive = (path: string) => {
+    // Exact match for root paths (e.g. /rep, /admin, /doctor) to avoid false positives
+    if (path === '/rep' || path === '/admin' || path === '/doctor') {
+      return location.pathname === path;
+    }
+    return location.pathname.startsWith(path);
+  };
 
   return (
     <aside className="hidden md:flex md:w-56 md:flex-col md:border-r md:bg-card md:shadow-sm">
