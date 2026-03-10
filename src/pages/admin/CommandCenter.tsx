@@ -76,7 +76,7 @@ export default function CommandCenter() {
                   const w = Math.max(20, (s.value / maxVal) * 100);
                   return (
                     <div key={s.name} className="flex items-center gap-3">
-                      <span className="w-28 flex-shrink-0 text-xs text-muted-foreground">{s.name}</span>
+                      <span className="w-20 flex-shrink-0 truncate text-xs text-muted-foreground sm:w-28">{s.name}</span>
                       <div className="flex-1 min-w-0">
                         <div className="h-6 rounded-sm bg-primary/10">
                           <div
