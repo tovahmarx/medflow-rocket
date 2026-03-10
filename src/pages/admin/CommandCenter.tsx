@@ -107,9 +107,9 @@ export default function CommandCenter() {
               <h3 className="mb-3 text-sm font-semibold text-foreground">Inventory Alerts</h3>
               <div className="space-y-2">
                 {products.filter(p => p.status !== 'OK').map(p => (
-                  <div key={p.id} className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm text-foreground">{p.name}</p>
+                  <div key={p.id} className="flex items-center justify-between gap-2">
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm text-foreground">{p.name}</p>
                       <p className="text-xs text-muted-foreground">{p.stock} units</p>
                     </div>
                     <StatusBadge variant={p.status === 'Critical' ? 'danger' : 'warning'}>{p.status}</StatusBadge>
