@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { BottomTabBar } from '@/components/layout/BottomTabBar';
 import { DesktopSidebar } from '@/components/layout/DesktopSidebar';
+import { AnimatedOutlet } from '@/components/layout/AnimatedOutlet';
 import {
   CheckSquare, Radio, Crosshair, TrendingUp, Users, DollarSign, Trophy,
   Calendar, Receipt, FileText, Library, GraduationCap, MessageSquare,
@@ -33,8 +34,8 @@ export default function RepShell() {
   return (
     <div className="flex min-h-screen w-full">
       <DesktopSidebar tabs={tabs} moreItems={moreItems} />
-      <div className="flex flex-1 flex-col pb-16 md:pb-0">
-        <Outlet />
+      <div className="flex flex-1 flex-col pb-16 md:pb-0 md:min-w-0">
+        <AnimatedOutlet />
       </div>
       <BottomTabBar tabs={tabs} moreItems={moreItems} />
     </div>

@@ -74,4 +74,18 @@
   .tap-target {
     @apply min-h-[44px] min-w-[44px];
   }
+
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+
+  .skeleton-shimmer {
+    background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted) / 0.5) 50%, hsl(var(--muted)) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+  }
+
+  .page-enter {
+    animation: fade-in 0.3s ease-out;
+  }
 }

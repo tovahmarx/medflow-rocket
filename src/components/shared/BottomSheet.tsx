@@ -16,13 +16,13 @@ export function BottomSheet({ open, onClose, title, children, className }: Botto
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center md:items-center" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-end justify-center md:items-center animate-fade-in" onClick={onClose}>
       <div className="fixed inset-0 bg-foreground/20" />
       <div
         onClick={e => e.stopPropagation()}
         className={cn(
           'relative z-50 w-full bg-background shadow-lg',
-          isMobile ? 'max-h-[85vh] rounded-t-2xl' : 'max-h-[80vh] max-w-lg rounded-lg',
+          isMobile ? 'max-h-[85vh] rounded-t-2xl animate-slide-up' : 'max-h-[80vh] max-w-lg rounded-lg animate-scale-in',
           className
         )}
       >

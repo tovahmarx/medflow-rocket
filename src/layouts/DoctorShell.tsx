@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { BottomTabBar } from '@/components/layout/BottomTabBar';
 import { DesktopSidebar } from '@/components/layout/DesktopSidebar';
+import { AnimatedOutlet } from '@/components/layout/AnimatedOutlet';
 import { CartProvider } from '@/contexts/CartContext';
 import { Home, ShoppingCart, ClipboardList, BookOpen, UserCheck } from 'lucide-react';
 
@@ -17,8 +18,8 @@ export default function DoctorShell() {
     <CartProvider>
       <div className="flex min-h-screen w-full">
         <DesktopSidebar tabs={tabs} moreItems={[]} />
-        <div className="flex flex-1 flex-col pb-16 md:pb-0">
-          <Outlet />
+        <div className="flex flex-1 flex-col pb-16 md:pb-0 md:min-w-0">
+          <AnimatedOutlet />
         </div>
         <BottomTabBar tabs={tabs} moreItems={[]} />
       </div>
