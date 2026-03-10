@@ -79,7 +79,9 @@ export default function Leaderboard({ isRepView = false }: { isRepView?: boolean
 
         {/* Leaderboard */}
         <div className="space-y-2">
-          {leaderboard.map((entry) => (
+          {(categoryData[activeCategory] || []).map((entry, idx) => {
+            const rank = idx + 1;
+            return (
             <div
               key={entry.userId}
               className={cn(
@@ -88,10 +90,10 @@ export default function Leaderboard({ isRepView = false }: { isRepView?: boolean
               )}
             >
               <div className="flex h-8 w-8 items-center justify-center">
-                {entry.rank <= 3 ? (
-                  <Trophy className={cn('h-6 w-6', rankColors[entry.rank])} />
+                {rank <= 3 ? (
+                  <Trophy className={cn('h-6 w-6', rankColors[rank])} />
                 ) : (
-                  <span className="text-sm font-bold text-muted-foreground">{entry.rank}</span>
+                  <span className="text-sm font-bold text-muted-foreground">{rank}</span>
                 )}
               </div>
               <AvatarCircle initials={entry.initials} size="sm" />
@@ -112,7 +114,8 @@ export default function Leaderboard({ isRepView = false }: { isRepView?: boolean
                 {entry.trend === 'same' && <Minus className="h-4 w-4 text-muted-foreground" />}
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Badges */}
