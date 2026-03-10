@@ -19,6 +19,11 @@ const tiers = [
 ];
 
 export default function Commission() {
+  const { user } = useAuth();
+  const perf = repPerformance.find(p => p.userId === user?.id);
+  const revenue = perf?.revenue ?? 0;
+  const target = perf?.quarterlyTarget ?? 300000;
+  const progress = perf?.goalProgress ?? 0;
   return (
     <>
       <TopBar title="Commission" />
