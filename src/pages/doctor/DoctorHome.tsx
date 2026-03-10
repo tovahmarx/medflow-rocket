@@ -48,13 +48,14 @@ export default function DoctorHome() {
           </div>
         </div>
 
+        {myRep && (
         <div className="rounded-lg border bg-card p-4">
           <p className="text-xs text-muted-foreground">Your Rep</p>
           <div className="mt-2 flex items-center gap-3">
-            <AvatarCircle initials="CM" />
+            <AvatarCircle initials={myRep.initials} />
             <div>
-              <p className="text-sm font-medium text-foreground">Clint M.</p>
-              <p className="text-xs text-muted-foreground">Sales Rep · Southeast</p>
+              <p className="text-sm font-medium text-foreground">{myRep.name}</p>
+              <p className="text-xs text-muted-foreground">Sales Rep · {myRep.territory}</p>
             </div>
           </div>
           <div className="mt-3 flex gap-2">
