@@ -26,7 +26,7 @@ export function TopBar({ title }: { title: string }) {
     type === 'info' ? 'bg-info/10 text-info' :
     'bg-offline/10 text-offline';
 
-  const recentSearches = ['Dr. Osei', 'MedGlide Pro', 'St. Luke\'s'];
+  const recentSearches = role === 'doctor' ? ['MedGlide Pro', 'OR Kit', 'Sterile Single Use'] : ['Dr. Osei', 'MedGlide Pro', 'St. Luke\'s'];
 
   const getSearchResults = (q: string) => {
     const lower = q.toLowerCase();
