@@ -56,6 +56,7 @@ import Chat from "@/pages/shared/Chat";
 import TrainingHub from "@/pages/shared/TrainingHub";
 import HelpSupport from "@/pages/shared/HelpSupport";
 import NotFound from "./pages/NotFound";
+import RoleGuard from "@/components/shared/RoleGuard";
 
 const queryClient = new QueryClient();
 
@@ -73,6 +74,7 @@ function AuthenticatedRoutes() {
         <Route path="/" element={<Navigate to={homeRedirect} replace />} />
 
         {/* Admin Routes */}
+        <Route element={<RoleGuard allowedRole="admin" />}>
         <Route path="/admin" element={<AdminShell />}>
           <Route index element={<CommandCenter />} />
           <Route path="reps" element={<SalesReps />} />
@@ -99,8 +101,10 @@ function AuthenticatedRoutes() {
           <Route path="settings" element={<Settings />} />
           <Route path="help" element={<HelpSupport />} />
         </Route>
+        </Route>
 
         {/* Rep Routes */}
+        <Route element={<RoleGuard allowedRole="rep" />}>
         <Route path="/rep" element={<RepShell />}>
           <Route index element={<MyTasks />} />
           <Route path="comms" element={<CommsHub />} />
@@ -120,8 +124,10 @@ function AuthenticatedRoutes() {
           <Route path="settings" element={<Settings />} />
           <Route path="help" element={<HelpSupport />} />
         </Route>
+        </Route>
 
         {/* Doctor Routes */}
+        <Route element={<RoleGuard allowedRole="doctor" />}>
         <Route path="/doctor" element={<DoctorShell />}>
           <Route index element={<DoctorHome />} />
           <Route path="order" element={<OrderProducts />} />
@@ -129,6 +135,7 @@ function AuthenticatedRoutes() {
           <Route path="learn" element={<Learn />} />
           <Route path="my-rep" element={<MyRep />} />
           <Route path="help" element={<HelpSupport />} />
+        </Route>
         </Route>
 
         <Route path="*" element={<NotFound />} />
