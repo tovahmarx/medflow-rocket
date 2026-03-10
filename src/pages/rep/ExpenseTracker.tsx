@@ -4,18 +4,20 @@ import { StatusBadge } from '@/components/shared/StatusBadge';
 import { FAB } from '@/components/shared/FAB';
 import { BottomSheet } from '@/components/shared/BottomSheet';
 import { AIInsightCard } from '@/components/shared/AIInsightCard';
-
-const expenses = [
-  { id: 1, date: 'Mar 6', type: 'Meal', amount: 42, desc: 'Lunch with Dr. Osei', status: 'Pending' },
-  { id: 2, date: 'Mar 5', type: 'Mileage', amount: 67.50, desc: '101 mi · Tampa route', status: 'Approved' },
-  { id: 3, date: 'Mar 4', type: 'Supplies', amount: 24, desc: 'Shipping materials', status: 'Draft' },
-  { id: 4, date: 'Mar 3', type: 'Meal', amount: 38, desc: 'Coffee with Dr. Addo', status: 'Approved' },
-];
+import { useAuth } from '@/contexts/AuthContext';
+import { expenses as allExpenses } from '@/data/mock-data';
 
 export default function ExpenseTracker() {
   const [showForm, setShowForm] = useState(false);
+  const { user } = useAuth();
 
+  const expenses = allExpenses.filter(e => e.repId === user?.id);
   const total = expenses.reduce((s, e) => s + e.amount, 0);
+
+  const byType = expenses.reduce((acc, e) => {
+    acc[e.type] = (acc[e.type] || 0) + e.amount;
+    return acc;
+  }, {} as Record<string, number>);
 
   return (
     <>
@@ -25,9 +27,9 @@ export default function ExpenseTracker() {
           <p className="text-xs text-muted-foreground">Monthly Total</p>
           <p className="text-2xl font-bold text-foreground">${total.toFixed(2)}</p>
           <div className="mt-2 flex gap-3 text-xs text-muted-foreground">
-            <span>Meals: $80</span>
-            <span>Mileage: $67.50</span>
-            <span>Supplies: $24</span>
+            {Object.entries(byType).map(([type, amt]) => (
+              <span key={type}>{type}: ${amt.toFixed(2)}</span>
+            ))}
           </div>
         </div>
 
@@ -46,9 +48,13 @@ export default function ExpenseTracker() {
           ))}
         </div>
 
-        <AIInsightCard>
-          Lunch with Dr. Osei ($42) should be logged in Sunshine Act. Create entry?
-        </AIInsightCard>
+        {expenses.length > 0 && (
+          <AIInsightCard>
+            {expenses.find(e => e.type === 'Meal') 
+              ? `${expenses.find(e => e.type === 'Meal')?.desc} ($${expenses.find(e => e.type === 'Meal')?.amount}) should be logged in Sunshine Act. Create entry?`
+              : 'No meal expenses to flag this period.'}
+          </AIInsightCard>
+        )}
       </div>
 
       <FAB onClick={() => setShowForm(true)} />

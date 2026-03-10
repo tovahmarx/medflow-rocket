@@ -3,7 +3,6 @@ import { TopBar } from '@/components/layout/TopBar';
 import { AvatarCircle } from '@/components/shared/AvatarCircle';
 import { StatusBadge } from '@/components/shared/StatusBadge';
 import { FilterBar } from '@/components/shared/FilterBar';
-import { leaderboard } from '@/data/mock-data';
 import { TrendingUp, TrendingDown, Minus, Trophy, Flame, Award } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
@@ -63,6 +62,25 @@ export default function Leaderboard({ isRepView = false }: { isRepView?: boolean
   const [activeCategory, setActiveCategory] = useState('Revenue');
   const { user } = useAuth();
 
+  const currentData = categoryData[activeCategory] || [];
+  const myRank = currentData.findIndex(e => e.userId === user?.id);
+  const leader = currentData[0];
+
+  // Build dynamic highlight for rep view
+  let highlightText = '';
+  let highlightSub = '';
+  if (isRepView && user && myRank >= 0) {
+    const rank = myRank + 1;
+    if (rank === 1) {
+      highlightText = `You're #1 — leading in ${activeCategory}!`;
+      highlightSub = 'Keep up the momentum.';
+    } else {
+      const myScore = currentData[myRank].score;
+      highlightText = `You're #${rank} — behind ${leader.name} (${leader.score}).`;
+      highlightSub = `Push ${rank - myRank} more spot${rank - myRank > 1 ? 's' : ''} to climb the board.`;
+    }
+  }
+
   return (
     <>
       <TopBar title="Leaderboard" />
@@ -70,16 +88,16 @@ export default function Leaderboard({ isRepView = false }: { isRepView?: boolean
         <FilterBar filters={categories} active={activeCategory} onSelect={setActiveCategory} />
 
         {/* Rep highlight */}
-        {isRepView && (
+        {isRepView && highlightText && (
           <div className="rounded-lg border border-primary/20 bg-primary/5 p-3">
-            <p className="text-sm font-medium text-foreground">You're #2 — $3,200 behind Priya.</p>
-            <p className="text-xs text-muted-foreground">2 more closes to take #1. Dr. Osei and St. Luke's are best bets.</p>
+            <p className="text-sm font-medium text-foreground">{highlightText}</p>
+            <p className="text-xs text-muted-foreground">{highlightSub}</p>
           </div>
         )}
 
         {/* Leaderboard */}
         <div className="space-y-2">
-          {(categoryData[activeCategory] || []).map((entry, idx) => {
+          {currentData.map((entry, idx) => {
             const rank = idx + 1;
             return (
             <div

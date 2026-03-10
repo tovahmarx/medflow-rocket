@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { TopBar } from '@/components/layout/TopBar';
 import { cn } from '@/lib/utils';
 import { Phone, MessageSquare, Mail, Video, Mic, Delete } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { commEntries, doctorAccounts, users } from '@/data/mock-data';
 
 const subTabs = [
   { label: 'Phone', icon: Phone },
@@ -10,7 +12,7 @@ const subTabs = [
   { label: 'Video', icon: Video },
 ];
 
-function DialPad() {
+function DialPad({ quickDial }: { quickDial: string[] }) {
   const [digits, setDigits] = useState('');
   const [callState, setCallState] = useState<'idle' | 'ringing' | 'connected' | 'ended'>('idle');
   const [timer, setTimer] = useState(0);
@@ -37,7 +39,7 @@ function DialPad() {
     return (
       <div className="flex flex-col items-center justify-center py-16">
         <div className="mb-4 h-16 w-16 animate-pulse rounded-full bg-primary/20" />
-        <p className="text-lg font-semibold text-foreground">Calling Dr. Osei...</p>
+        <p className="text-lg font-semibold text-foreground">Calling...</p>
         <button onClick={endCall} className="mt-8 flex h-14 w-14 items-center justify-center rounded-full bg-destructive">
           <Phone className="h-6 w-6 text-primary-foreground" />
         </button>
@@ -95,7 +97,7 @@ function DialPad() {
         <Phone className="h-7 w-7 text-primary-foreground" />
       </button>
       <div className="mt-6 flex gap-2 overflow-x-auto pb-2">
-        {['Dr. Osei', 'Dr. Park', 'Dr. Webb'].map(n => (
+        {quickDial.map(n => (
           <button key={n} className="whitespace-nowrap rounded-full bg-muted px-3 py-1 text-xs font-medium text-foreground tap-target">{n}</button>
         ))}
       </div>
@@ -103,20 +105,26 @@ function DialPad() {
   );
 }
 
-function TextTab() {
-  const threads = [
-    { name: 'Dr. Osei', last: 'Yes please, we\'re running low', time: '9:31 AM', unread: 1 },
-    { name: 'Dr. Park', last: 'Works for me.', time: 'Yesterday', unread: 0 },
-    { name: 'Dr. Cruz', last: 'Wanted to check in', time: '2 days ago', unread: 0 },
-  ];
+function TextTab({ repId }: { repId: string }) {
+  // Get doctors assigned to this rep
+  const myDoctorIds = doctorAccounts.filter(d => d.assignedRep === repId).map(d => d.userId);
+  const myDoctors = users.filter(u => myDoctorIds.includes(u.id));
+
+  const threads = myDoctors.slice(0, 3).map((d, i) => ({
+    name: d.name,
+    last: i === 0 ? "Yes please, we're running low" : i === 1 ? 'Works for me.' : 'Wanted to check in',
+    time: i === 0 ? '9:31 AM' : i === 1 ? 'Yesterday' : '2 days ago',
+    unread: i === 0 ? 1 : 0,
+  }));
+
   const [selected, setSelected] = useState<string | null>(null);
 
-  if (selected === 'Dr. Osei') {
+  if (selected && threads.find(t => t.name === selected)) {
     return (
       <div className="flex flex-col h-[60vh]">
         <button onClick={() => setSelected(null)} className="mb-2 text-xs text-primary tap-target">← Back</button>
         <div className="flex-1 space-y-2 overflow-y-auto">
-          <div className="flex justify-start"><div className="max-w-[80%] rounded-2xl rounded-bl-sm bg-muted px-3 py-2 text-sm">Yes please, we're running low</div></div>
+          <div className="flex justify-start"><div className="max-w-[80%] rounded-2xl rounded-bl-sm bg-muted px-3 py-2 text-sm">{threads.find(t => t.name === selected)?.last}</div></div>
           <div className="flex justify-end"><div className="max-w-[80%] rounded-2xl rounded-br-sm bg-primary/10 px-3 py-2 text-sm">On it — sending sheet now.</div></div>
         </div>
         <div className="mt-2 flex items-center gap-2 rounded-xl border bg-card p-2 text-sm">
@@ -148,7 +156,18 @@ function TextTab() {
   );
 }
 
-function EmailTab() {
+function EmailTab({ repId }: { repId: string }) {
+  const myDoctorIds = doctorAccounts.filter(d => d.assignedRep === repId).map(d => d.userId);
+  const myDoctors = users.filter(u => myDoctorIds.includes(u.id));
+
+  const emails = myDoctors.slice(0, 2).map((d, i) => ({
+    from: d.name,
+    subject: i === 0 ? 'Re: Pricing for bulk order' : 'Re: Thursday call',
+    preview: i === 0 ? `Hi, thanks for...` : 'Confirmed, talk then.',
+    time: i === 0 ? 'Today' : 'Yesterday',
+    unread: i === 0,
+  }));
+
   return (
     <div className="space-y-2">
       <div className="flex gap-2">
@@ -156,10 +175,7 @@ function EmailTab() {
           <button key={t} className="rounded-full bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground tap-target first:bg-primary first:text-primary-foreground">{t}</button>
         ))}
       </div>
-      {[
-        { from: 'Dr. Osei', subject: 'Re: Pricing for bulk order', preview: 'Hi Clint, thanks for...', time: 'Today', unread: true },
-        { from: 'Dr. Park', subject: 'Re: Thursday call', preview: 'Confirmed, talk then.', time: 'Yesterday', unread: false },
-      ].map(e => (
+      {emails.map(e => (
         <div key={e.subject} className="rounded-lg border bg-card p-3 active:bg-muted/50">
           <div className="flex items-center justify-between">
             <p className={cn('text-sm', e.unread ? 'font-semibold text-foreground' : 'text-muted-foreground')}>{e.from}</p>
@@ -178,7 +194,7 @@ function VideoTab() {
     <div className="space-y-4 py-4">
       <div className="rounded-lg border bg-card p-4">
         <p className="text-sm font-medium text-foreground">Upcoming</p>
-        <p className="mt-1 text-xs text-muted-foreground">Video Demo with Dr. Park — Thu 2:00 PM</p>
+        <p className="mt-1 text-xs text-muted-foreground">Video Demo — Thu 2:00 PM</p>
         <button className="mt-3 rounded-lg bg-primary px-4 py-2 text-xs font-medium text-primary-foreground tap-target">Join Call</button>
       </div>
       <button className="w-full rounded-lg border bg-card p-4 text-sm font-medium text-foreground tap-target active:bg-muted/50">
@@ -190,6 +206,12 @@ function VideoTab() {
 
 export default function CommsHub() {
   const [activeTab, setActiveTab] = useState(0);
+  const { user } = useAuth();
+  const repId = user?.id || '';
+
+  // Quick dial: doctors assigned to this rep
+  const myDoctorIds = doctorAccounts.filter(d => d.assignedRep === repId).map(d => d.userId);
+  const quickDial = users.filter(u => myDoctorIds.includes(u.id)).map(u => u.name);
 
   return (
     <>
@@ -211,9 +233,9 @@ export default function CommsHub() {
           ))}
         </div>
 
-        {activeTab === 0 && <DialPad />}
-        {activeTab === 1 && <TextTab />}
-        {activeTab === 2 && <EmailTab />}
+        {activeTab === 0 && <DialPad quickDial={quickDial} />}
+        {activeTab === 1 && <TextTab repId={repId} />}
+        {activeTab === 2 && <EmailTab repId={repId} />}
         {activeTab === 3 && <VideoTab />}
       </div>
     </>

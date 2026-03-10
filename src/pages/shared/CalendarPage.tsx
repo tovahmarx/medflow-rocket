@@ -3,6 +3,8 @@ import { TopBar } from '@/components/layout/TopBar';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { BottomSheet } from '@/components/shared/BottomSheet';
+import { useAuth } from '@/contexts/AuthContext';
+import { calendarEvents } from '@/data/mock-data';
 
 const eventColors: Record<string, string> = {
   Call: 'bg-success/10 border-l-4 border-l-success',
@@ -14,21 +16,23 @@ const eventColors: Record<string, string> = {
   Training: 'bg-teal-50 border-l-4 border-l-teal-400',
 };
 
-const weekEvents = [
-  { day: 'Mon', events: [{ time: '9:00 AM', title: 'Call Dr. Osei', type: 'Call', rep: 'Clint' }, { time: '1:00 PM', title: 'Visit Dr. Webb', type: 'Visit', rep: 'Clint' }] },
-  { day: 'Tue', events: [{ time: '10:00 AM', title: 'Video Demo Dr. Park', type: 'Video Demo', rep: 'Priya' }] },
-  { day: 'Wed', events: [{ time: '2:00 PM', title: 'Training Session', type: 'Training', rep: 'Kelly' }] },
-  { day: 'Thu', events: [{ time: '11:00 AM', title: 'Presentation Tampa Surgery', type: 'Presentation', rep: 'Clint' }] },
-  { day: 'Fri', events: [{ time: '9:00 AM', title: "Follow-up St. Luke's", type: 'Follow-up', rep: 'Clint' }] },
-  { day: 'Sat', events: [] },
-  { day: 'Sun', events: [] },
-];
-
+const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const views = ['Day', 'Week', 'Month'];
 
 export default function CalendarPage() {
   const [view, setView] = useState('Week');
   const [showCreate, setShowCreate] = useState(false);
+  const { user, role } = useAuth();
+
+  // Admin sees all events, reps see their own
+  const myEvents = role === 'admin'
+    ? calendarEvents
+    : calendarEvents.filter(e => e.repId === user?.id);
+
+  const weekEvents = days.map(day => ({
+    day,
+    events: myEvents.filter(e => e.day === day),
+  }));
 
   return (
     <>
@@ -79,7 +83,7 @@ export default function CalendarPage() {
                         <p className="text-sm font-medium text-foreground">{e.title}</p>
                         <span className="text-[10px] text-muted-foreground">{e.time}</span>
                       </div>
-                      <p className="text-xs text-muted-foreground">{e.rep} · {e.type}</p>
+                      <p className="text-xs text-muted-foreground">{e.type}</p>
                       {e.type === 'Video Demo' && (
                         <button className="mt-1 rounded-md bg-primary px-2 py-1 text-[10px] font-medium text-primary-foreground tap-target">Join</button>
                       )}
