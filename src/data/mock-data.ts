@@ -184,6 +184,20 @@ export const commEntries: CommEntry[] = [
   { id: 'c4', repId: 'u2', repName: 'Clint M.', target: 'Dr. Renata Osei', type: 'call', duration: '6m 42s', outcomeBadge: 'Interested', time: '9:14 AM' },
   { id: 'c5', repId: 'u2', repName: 'Clint M.', target: 'Dr. Osei', type: 'presentation', slideCount: 8, duration: '12 min', engagement: 'High', time: '9:00 AM', message: 'Product Overview — 8 slides, 12 min, High engagement' },
   { id: 'c6', repId: 'u3', repName: 'Sara L.', target: 'Dr. Marcus Webb', type: 'call', duration: '2m 05s', outcomeBadge: 'Voicemail', time: 'Yesterday' },
+  { id: 'c7', repId: 'u4', repName: 'James R.', target: 'Dr. Nguyen', type: 'call', duration: '8m 32s', outcomeBadge: 'Interested', time: 'Yesterday' },
+  { id: 'c8', repId: 'u3', repName: 'Sara L.', target: 'Dr. Rao', type: 'email', message: 'Sent clinical trial results for MedGlide Pro', time: 'Yesterday' },
+  { id: 'c9', repId: 'u2', repName: 'Clint M.', target: 'Dr. Elena Cruz', type: 'call', duration: '1m 12s', outcomeBadge: 'Voicemail', time: 'Yesterday' },
+  { id: 'c10', repId: 'u5', repName: 'Priya N.', target: 'Dr. Patel', type: 'video', duration: '22m 10s', outcomeBadge: 'Ordered', time: 'Yesterday', message: 'Virtual demo — placed 50-unit order' },
+  { id: 'c11', repId: 'u4', repName: 'James R.', target: 'Dr. Adams', type: 'text', message: 'Following up on sample kit — any feedback?', time: 'Yesterday' },
+  { id: 'c12', repId: 'u3', repName: 'Sara L.', target: 'Dr. Kim', type: 'call', duration: '14m 45s', outcomeBadge: 'Ordered', time: '2 days ago' },
+  { id: 'c13', repId: 'u2', repName: 'Clint M.', target: 'Dr. Reyes', type: 'presentation', slideCount: 12, duration: '18 min', engagement: 'Medium', time: '2 days ago', message: 'Full product line overview — 12 slides, 18 min, Medium engagement' },
+  { id: 'c14', repId: 'u5', repName: 'Priya N.', target: 'Tampa Surgery Center', type: 'call', duration: '5m 20s', outcomeBadge: 'Follow-up', time: '2 days ago' },
+  { id: 'c15', repId: 'u4', repName: 'James R.', target: 'Dr. Foster', type: 'email', message: 'Bulk pricing proposal attached for Q2', time: '2 days ago' },
+  { id: 'c16', repId: 'u3', repName: 'Sara L.', target: 'Dr. Diallo', type: 'call', duration: '9m 55s', outcomeBadge: 'Interested', time: '3 days ago' },
+  { id: 'c17', repId: 'u2', repName: 'Clint M.', target: 'Dr. Webb', type: 'text', message: 'Sample kit tracking #: shipped via FedEx', time: '3 days ago' },
+  { id: 'c18', repId: 'u5', repName: 'Priya N.', target: 'Dr. Tanaka', type: 'call', duration: '3m 40s', outcomeBadge: 'Not Interested', time: '3 days ago' },
+  { id: 'c19', repId: 'u4', repName: 'James R.', target: 'Chicago Med Group', type: 'video', duration: '30m 00s', outcomeBadge: 'Follow-up', time: '4 days ago', message: 'Group demo for surgical team — scheduling trial' },
+  { id: 'c20', repId: 'u3', repName: 'Sara L.', target: 'Dr. Foster', type: 'call', duration: '7m 15s', outcomeBadge: 'Interested', time: '4 days ago' },
 ];
 
 // ============ TASKS ============
