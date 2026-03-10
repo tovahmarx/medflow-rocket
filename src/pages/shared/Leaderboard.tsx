@@ -10,6 +10,45 @@ import { useAuth } from '@/contexts/AuthContext';
 
 const categories = ['Revenue', 'Calls', 'Leads', 'Pipeline', 'Presentations', 'Commission'];
 
+const categoryData: Record<string, { userId: string; name: string; initials: string; score: string; trend: 'up' | 'down' | 'same'; streak?: number }[]> = {
+  Revenue: [
+    { userId: 'u5', name: 'Priya N.', initials: 'PN', score: '$320K', trend: 'up', streak: 14 },
+    { userId: 'u2', name: 'Clint M.', initials: 'CM', score: '$284K', trend: 'up' },
+    { userId: 'u3', name: 'Sara L.', initials: 'SL', score: '$192K', trend: 'down' },
+    { userId: 'u4', name: 'James R.', initials: 'JR', score: '$110K', trend: 'same' },
+  ],
+  Calls: [
+    { userId: 'u2', name: 'Clint M.', initials: 'CM', score: '142', trend: 'up', streak: 8 },
+    { userId: 'u5', name: 'Priya N.', initials: 'PN', score: '138', trend: 'up' },
+    { userId: 'u3', name: 'Sara L.', initials: 'SL', score: '97', trend: 'same' },
+    { userId: 'u4', name: 'James R.', initials: 'JR', score: '64', trend: 'down' },
+  ],
+  Leads: [
+    { userId: 'u5', name: 'Priya N.', initials: 'PN', score: '23', trend: 'up' },
+    { userId: 'u3', name: 'Sara L.', initials: 'SL', score: '18', trend: 'up', streak: 5 },
+    { userId: 'u2', name: 'Clint M.', initials: 'CM', score: '15', trend: 'same' },
+    { userId: 'u4', name: 'James R.', initials: 'JR', score: '8', trend: 'down' },
+  ],
+  Pipeline: [
+    { userId: 'u5', name: 'Priya N.', initials: 'PN', score: '$3.2M', trend: 'up' },
+    { userId: 'u2', name: 'Clint M.', initials: 'CM', score: '$2.8M', trend: 'up' },
+    { userId: 'u3', name: 'Sara L.', initials: 'SL', score: '$1.9M', trend: 'down' },
+    { userId: 'u4', name: 'James R.', initials: 'JR', score: '$1.1M', trend: 'same' },
+  ],
+  Presentations: [
+    { userId: 'u2', name: 'Clint M.', initials: 'CM', score: '34', trend: 'up', streak: 12 },
+    { userId: 'u3', name: 'Sara L.', initials: 'SL', score: '28', trend: 'up' },
+    { userId: 'u5', name: 'Priya N.', initials: 'PN', score: '22', trend: 'same' },
+    { userId: 'u4', name: 'James R.', initials: 'JR', score: '11', trend: 'down' },
+  ],
+  Commission: [
+    { userId: 'u5', name: 'Priya N.', initials: 'PN', score: '$47.2K', trend: 'up', streak: 14 },
+    { userId: 'u2', name: 'Clint M.', initials: 'CM', score: '$41.6K', trend: 'up' },
+    { userId: 'u3', name: 'Sara L.', initials: 'SL', score: '$28.1K', trend: 'down' },
+    { userId: 'u4', name: 'James R.', initials: 'JR', score: '$14.3K', trend: 'same' },
+  ],
+};
+
 const badges = [
   { name: 'First $100K Quarter', owner: 'Priya N.', icon: '💰' },
   { name: '50 Calls in a Week', owner: 'Clint M.', icon: '📞' },
