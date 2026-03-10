@@ -30,11 +30,11 @@ export function TopBar({ title }: { title: string }) {
 
   const getSearchResults = (q: string) => {
     const lower = q.toLowerCase();
-    const matchedDoctors = users.filter(u => u.role === 'doctor' && (u.name.toLowerCase().includes(lower) || u.specialty?.toLowerCase().includes(lower)));
-    const matchedReps = users.filter(u => u.role === 'rep' && u.name.toLowerCase().includes(lower));
+    const matchedDoctors = role !== 'doctor' ? users.filter(u => u.role === 'doctor' && (u.name.toLowerCase().includes(lower) || u.specialty?.toLowerCase().includes(lower))) : [];
+    const matchedReps = role !== 'doctor' ? users.filter(u => u.role === 'rep' && u.name.toLowerCase().includes(lower)) : [];
     const matchedProducts = products.filter(p => p.name.toLowerCase().includes(lower) || p.sku.toLowerCase().includes(lower));
-    const matchedDeals = deals.filter(d => d.doctorName.toLowerCase().includes(lower) || d.practice.toLowerCase().includes(lower));
-    const matchedComms = commEntries.filter(c => c.target.toLowerCase().includes(lower) || c.repName.toLowerCase().includes(lower));
+    const matchedDeals = role !== 'doctor' ? deals.filter(d => d.doctorName.toLowerCase().includes(lower) || d.practice.toLowerCase().includes(lower)) : [];
+    const matchedComms = role !== 'doctor' ? commEntries.filter(c => c.target.toLowerCase().includes(lower) || c.repName.toLowerCase().includes(lower)) : [];
     return { matchedDoctors, matchedReps, matchedProducts, matchedDeals, matchedComms };
   };
 
