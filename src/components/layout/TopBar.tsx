@@ -1,12 +1,14 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, Bell, HelpCircle, LogOut, X } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { notifications } from '@/data/mock-data';
+import { notifications, users, doctors, deals, products, commEntries } from '@/data/mock-data';
 import { BottomSheet } from '@/components/shared/BottomSheet';
 import { AvatarCircle } from '@/components/shared/AvatarCircle';
 
 export function TopBar({ title }: { title: string }) {
-  const { user, logout } = useAuth();
+  const { user, role, logout } = useAuth();
+  const navigate = useNavigate();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,6 +20,20 @@ export function TopBar({ title }: { title: string }) {
     type === 'warning' ? 'bg-warning/10 text-warning' :
     type === 'info' ? 'bg-info/10 text-info' :
     'bg-offline/10 text-offline';
+
+  const recentSearches = ['Dr. Osei', 'MedGlide Pro', 'St. Luke\'s'];
+
+  const getSearchResults = (q: string) => {
+    const lower = q.toLowerCase();
+    const matchedDoctors = users.filter(u => u.role === 'doctor' && (u.name.toLowerCase().includes(lower) || u.specialty?.toLowerCase().includes(lower)));
+    const matchedReps = users.filter(u => u.role === 'rep' && u.name.toLowerCase().includes(lower));
+    const matchedProducts = products.filter(p => p.name.toLowerCase().includes(lower) || p.sku.toLowerCase().includes(lower));
+    const matchedDeals = deals.filter(d => d.doctorName.toLowerCase().includes(lower) || d.practice.toLowerCase().includes(lower));
+    const matchedComms = commEntries.filter(c => c.target.toLowerCase().includes(lower) || c.repName.toLowerCase().includes(lower));
+    return { matchedDoctors, matchedReps, matchedProducts, matchedDeals, matchedComms };
+  };
+
+  const helpPath = role === 'admin' ? '/admin/help' : role === 'rep' ? '/rep/help' : '/doctor/help';
 
   return (
     <>
@@ -34,6 +50,9 @@ export function TopBar({ title }: { title: string }) {
                 {unread}
               </span>
             )}
+          </button>
+          <button onClick={() => navigate(helpPath)} className="rounded-full p-2 hover:bg-muted tap-target">
+            <HelpCircle className="h-5 w-5 text-muted-foreground" />
           </button>
           <button onClick={logout} className="rounded-full p-2 hover:bg-muted tap-target">
             <LogOut className="h-5 w-5 text-muted-foreground" />
@@ -57,41 +76,87 @@ export function TopBar({ title }: { title: string }) {
               <X className="h-5 w-5 text-muted-foreground" />
             </button>
           </div>
-          <div className="p-4">
+          <div className="overflow-y-auto p-4" style={{ maxHeight: 'calc(100vh - 56px)' }}>
             {searchQuery.length === 0 ? (
-              <p className="text-xs text-muted-foreground">Recent searches will appear here</p>
-            ) : (
-              <div className="space-y-4">
-                {searchQuery.toLowerCase().includes('osei') && (
-                  <>
-                    <div>
-                      <p className="mb-2 text-xs font-medium text-muted-foreground">DOCTORS</p>
-                      <div className="flex items-center gap-3 rounded-lg p-2 active:bg-muted">
-                        <AvatarCircle initials="RO" size="sm" />
-                        <div>
-                          <p className="text-sm font-medium text-foreground">Dr. Renata Osei</p>
-                          <p className="text-xs text-muted-foreground">Urology · Urology Associates</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <p className="mb-2 text-xs font-medium text-muted-foreground">ORDERS</p>
-                      <div className="flex items-center gap-3 rounded-lg p-2 active:bg-muted">
-                        <p className="text-sm text-foreground">ORD-0091 · 24× MedGlide Pro · $1,152</p>
-                      </div>
-                    </div>
-                    <div>
-                      <p className="mb-2 text-xs font-medium text-muted-foreground">CALLS</p>
-                      <div className="flex items-center gap-3 rounded-lg p-2 active:bg-muted">
-                        <p className="text-sm text-foreground">Call with Dr. Osei · 6m 42s · Interested</p>
-                      </div>
-                    </div>
-                  </>
-                )}
-                {!searchQuery.toLowerCase().includes('osei') && (
-                  <p className="text-sm text-muted-foreground">No results for "{searchQuery}"</p>
-                )}
+              <div>
+                <p className="mb-3 text-xs font-medium text-muted-foreground">RECENT SEARCHES</p>
+                <div className="space-y-1">
+                  {recentSearches.map(s => (
+                    <button key={s} onClick={() => setSearchQuery(s)} className="flex w-full items-center gap-2 rounded-lg p-2 text-sm text-foreground tap-target active:bg-muted">
+                      <Search className="h-3.5 w-3.5 text-muted-foreground" />
+                      {s}
+                    </button>
+                  ))}
+                </div>
               </div>
+            ) : (
+              (() => {
+                const { matchedDoctors, matchedReps, matchedProducts, matchedDeals, matchedComms } = getSearchResults(searchQuery);
+                const hasResults = matchedDoctors.length || matchedReps.length || matchedProducts.length || matchedDeals.length || matchedComms.length;
+                if (!hasResults) return <p className="text-sm text-muted-foreground">No results for "{searchQuery}"</p>;
+                return (
+                  <div className="space-y-4">
+                    {matchedDoctors.length > 0 && (
+                      <div>
+                        <p className="mb-2 text-xs font-medium text-muted-foreground">DOCTORS</p>
+                        {matchedDoctors.map(d => (
+                          <div key={d.id} className="flex items-center gap-3 rounded-lg p-2 active:bg-muted">
+                            <AvatarCircle initials={d.initials} size="sm" />
+                            <div>
+                              <p className="text-sm font-medium text-foreground">{d.name}</p>
+                              <p className="text-xs text-muted-foreground">{d.specialty} · {d.practice}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {matchedReps.length > 0 && (
+                      <div>
+                        <p className="mb-2 text-xs font-medium text-muted-foreground">REPS</p>
+                        {matchedReps.map(r => (
+                          <div key={r.id} className="flex items-center gap-3 rounded-lg p-2 active:bg-muted">
+                            <AvatarCircle initials={r.initials} size="sm" />
+                            <div>
+                              <p className="text-sm font-medium text-foreground">{r.name}</p>
+                              <p className="text-xs text-muted-foreground">{r.territory}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {matchedProducts.length > 0 && (
+                      <div>
+                        <p className="mb-2 text-xs font-medium text-muted-foreground">PRODUCTS</p>
+                        {matchedProducts.map(p => (
+                          <div key={p.id} className="flex items-center gap-3 rounded-lg p-2 active:bg-muted">
+                            <p className="text-sm text-foreground">{p.name} · {p.sku} · ${p.price}/{p.unit}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {matchedDeals.length > 0 && (
+                      <div>
+                        <p className="mb-2 text-xs font-medium text-muted-foreground">DEALS</p>
+                        {matchedDeals.map(d => (
+                          <div key={d.id} className="flex items-center gap-3 rounded-lg p-2 active:bg-muted">
+                            <p className="text-sm text-foreground">{d.doctorName} · ${d.value.toLocaleString()} · {d.stage}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {matchedComms.length > 0 && (
+                      <div>
+                        <p className="mb-2 text-xs font-medium text-muted-foreground">COMMUNICATIONS</p>
+                        {matchedComms.map(c => (
+                          <div key={c.id} className="flex items-center gap-3 rounded-lg p-2 active:bg-muted">
+                            <p className="text-sm text-foreground">{c.repName} → {c.target} · {c.type} · {c.time}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })()
             )}
           </div>
         </div>

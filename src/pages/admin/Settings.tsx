@@ -4,6 +4,7 @@ import { reps, users, products } from '@/data/mock-data';
 import { AvatarCircle } from '@/components/shared/AvatarCircle';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTour } from '@/contexts/TourContext';
 
 const sections = [
   {
@@ -102,13 +103,23 @@ const sections = [
       </div>
     ),
   },
-  {
-    title: 'Onboarding Tour',
-    content: () => (
-      <button className="rounded-lg border py-3 w-full text-sm font-medium text-foreground tap-target">Restart Onboarding Tour</button>
-    ),
-  },
 ];
+
+function OnboardingButton() {
+  const { startTour } = useTour();
+  return (
+    <button onClick={startTour} className="rounded-lg border py-3 w-full text-sm font-medium text-foreground tap-target">
+      Restart Onboarding Tour
+    </button>
+  );
+}
+
+const onboardingSection = {
+  title: 'Onboarding Tour',
+  content: () => <OnboardingButton />,
+};
+
+const allSections = [...sections, onboardingSection];
 
 export default function Settings() {
   const [openSections, setOpenSections] = useState<Set<string>>(new Set());
@@ -125,7 +136,7 @@ export default function Settings() {
     <>
       <TopBar title="Settings" />
       <div className="space-y-2 p-4">
-        {sections.map(s => (
+        {allSections.map(s => (
           <div key={s.title} className="rounded-lg border bg-card">
             <button onClick={() => toggle(s.title)} className="flex w-full items-center justify-between p-4 tap-target">
               <p className="text-sm font-semibold text-foreground">{s.title}</p>
