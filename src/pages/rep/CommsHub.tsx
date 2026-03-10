@@ -160,25 +160,101 @@ function EmailTab({ repId }: { repId: string }) {
   const myDoctorIds = doctorAccounts.filter(d => d.assignedRep === repId).map(d => d.userId);
   const myDoctors = users.filter(u => myDoctorIds.includes(u.id));
 
-  const emails = myDoctors.slice(0, 2).map((d, i) => ({
-    from: d.name,
-    subject: i === 0 ? 'Re: Pricing for bulk order' : 'Re: Thursday call',
-    preview: i === 0 ? `Hi, thanks for...` : 'Confirmed, talk then.',
-    time: i === 0 ? 'Today' : 'Yesterday',
-    unread: i === 0,
-  }));
+  const allEmails = [
+    ...myDoctors.slice(0, 1).map(d => ({ from: d.name, subject: 'Re: Pricing for bulk order', preview: 'Hi, thanks for sending that over. Can we schedule a call to discuss volume discounts?', time: 'Today', unread: true })),
+    ...myDoctors.slice(1, 2).map(d => ({ from: d.name, subject: 'Re: Thursday call', preview: 'Confirmed, talk then. I have a few questions about the new line.', time: 'Today', unread: true })),
+    ...myDoctors.slice(2, 3).map(d => ({ from: d.name, subject: 'Sample request — MedGlide Pro', preview: 'Would love to try the new MedGlide Pro in our next procedure. Can you send samples?', time: 'Yesterday', unread: false })),
+    ...myDoctors.slice(0, 1).map(d => ({ from: d.name, subject: 'Re: Clinical trial data', preview: 'The results look promising. Let me share with my team and get back to you.', time: 'Yesterday', unread: false })),
+    ...myDoctors.slice(3, 4).map(d => ({ from: d.name, subject: 'Invoice question', preview: 'Quick question about the last invoice — the PO number doesn\'t match our records.', time: '2 days ago', unread: false })),
+    ...myDoctors.slice(1, 2).map(d => ({ from: d.name, subject: 'Re: Product training session', preview: 'My staff is available next Tuesday for the training. Does 10 AM work?', time: '3 days ago', unread: false })),
+    ...myDoctors.slice(4, 5).map(d => ({ from: d.name || 'Dr. Contact', subject: 'Competitor pricing concern', preview: 'I got a quote from another vendor that\'s 15% lower. Can we discuss?', time: '4 days ago', unread: false })),
+  ].filter(e => e.from);
+
+  const sentEmails = [
+    { to: myDoctors[0]?.name || 'Doctor', subject: 'MedGlide Pro — Updated Pricing', preview: 'Hi Doctor, as discussed, here is the updated pricing sheet for bulk orders...', time: 'Today' },
+    { to: myDoctors[1]?.name || 'Doctor', subject: 'Follow-up: Training Session', preview: 'Thank you for your interest. I\'ve attached the training schedule...', time: 'Yesterday' },
+    { to: myDoctors[2]?.name || 'Doctor', subject: 'Sample Shipment Confirmation', preview: 'Your samples have been shipped and should arrive by Thursday...', time: '2 days ago' },
+  ];
+
+  const [activeMailTab, setActiveMailTab] = useState('Inbox');
+  const [selectedEmail, setSelectedEmail] = useState<number | null>(null);
+  const [composing, setComposing] = useState(false);
+
+  if (composing) {
+    return (
+      <div className="space-y-3">
+        <button onClick={() => setComposing(false)} className="text-xs text-primary tap-target">← Back</button>
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 rounded-lg border bg-card px-3 py-2">
+            <span className="text-xs text-muted-foreground">To:</span>
+            <input className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground" placeholder="Select a contact..." />
+          </div>
+          <input className="w-full rounded-lg border bg-card px-3 py-2 text-sm outline-none placeholder:text-muted-foreground" placeholder="Subject" />
+          <textarea className="w-full rounded-lg border bg-card p-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary" rows={6} placeholder="Write your email..." />
+          <div className="flex items-center gap-2">
+            <button className="flex-1 rounded-lg bg-primary py-2.5 text-sm font-semibold text-primary-foreground tap-target">Send</button>
+            <button className="rounded-lg border px-4 py-2.5 text-sm font-medium text-muted-foreground tap-target">Attach</button>
+            <button className="rounded-lg border px-4 py-2.5 text-sm font-medium text-muted-foreground tap-target">Template</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (selectedEmail !== null && activeMailTab === 'Inbox') {
+    const email = allEmails[selectedEmail];
+    return (
+      <div className="space-y-3">
+        <button onClick={() => setSelectedEmail(null)} className="text-xs text-primary tap-target">← Back to Inbox</button>
+        <div className="rounded-lg border bg-card p-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-semibold text-foreground">{email.from}</p>
+            <span className="text-[10px] text-muted-foreground">{email.time}</span>
+          </div>
+          <p className="text-sm font-medium text-foreground">{email.subject}</p>
+          <p className="text-sm text-muted-foreground leading-relaxed">{email.preview} We appreciate your partnership and look forward to continuing our collaboration on this.</p>
+          <div className="flex gap-2 pt-2 border-t border-border">
+            <button className="flex-1 rounded-lg bg-primary py-2 text-xs font-semibold text-primary-foreground tap-target">Reply</button>
+            <button className="rounded-lg border px-4 py-2 text-xs font-medium text-muted-foreground tap-target">Forward</button>
+            <button className="rounded-lg border px-4 py-2 text-xs font-medium text-destructive tap-target">Archive</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-2">
       <div className="flex gap-2">
         {['Inbox', 'Sent', 'Compose'].map(t => (
-          <button key={t} className="rounded-full bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground tap-target first:bg-primary first:text-primary-foreground">{t}</button>
+          <button
+            key={t}
+            onClick={() => { if (t === 'Compose') { setComposing(true); } else { setActiveMailTab(t); setSelectedEmail(null); } }}
+            className={cn('rounded-full px-3 py-1.5 text-xs font-medium tap-target transition-colors',
+              (t === activeMailTab && t !== 'Compose') ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
+            )}
+          >{t}</button>
         ))}
       </div>
-      {emails.map(e => (
-        <div key={e.subject} className="rounded-lg border bg-card p-3 active:bg-muted/50">
+
+      {activeMailTab === 'Inbox' && allEmails.map((e, i) => (
+        <div key={i} onClick={() => setSelectedEmail(i)} className="rounded-lg border bg-card p-3 cursor-pointer active:bg-muted/50 transition-colors">
           <div className="flex items-center justify-between">
-            <p className={cn('text-sm', e.unread ? 'font-semibold text-foreground' : 'text-muted-foreground')}>{e.from}</p>
+            <div className="flex items-center gap-2">
+              {e.unread && <div className="h-2 w-2 rounded-full bg-primary" />}
+              <p className={cn('text-sm', e.unread ? 'font-semibold text-foreground' : 'text-muted-foreground')}>{e.from}</p>
+            </div>
+            <span className="text-[10px] text-muted-foreground">{e.time}</span>
+          </div>
+          <p className="text-xs font-medium text-foreground">{e.subject}</p>
+          <p className="truncate text-xs text-muted-foreground">{e.preview}</p>
+        </div>
+      ))}
+
+      {activeMailTab === 'Sent' && sentEmails.map((e, i) => (
+        <div key={i} className="rounded-lg border bg-card p-3">
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">To: {e.to}</p>
             <span className="text-[10px] text-muted-foreground">{e.time}</span>
           </div>
           <p className="text-xs font-medium text-foreground">{e.subject}</p>
