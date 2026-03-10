@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { TourProvider } from "@/contexts/TourContext";
 import { TourOverlay } from "@/components/shared/TourOverlay";
+import { OfflineBanner } from "@/components/shared/OfflineBanner";
 import LoginPage from "@/pages/LoginPage";
 import AdminShell from "@/layouts/AdminShell";
 import RepShell from "@/layouts/RepShell";
