@@ -35,6 +35,8 @@ export default function HelpSupport() {
   const [activeTab, setActiveTab] = useState<'faq' | 'contact' | 'bug'>('faq');
   const [submitted, setSubmitted] = useState(false);
   const { startTour } = useTour();
+  const { role } = useAuth();
+  const faqs = faqsByRole[role ?? 'doctor'];
 
   const tabs = [
     { id: 'faq' as const, label: 'FAQ', icon: MessageSquare },
