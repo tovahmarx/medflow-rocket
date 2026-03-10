@@ -13,10 +13,22 @@ import SalesReps from "@/pages/admin/SalesReps";
 import DoctorAccounts from "@/pages/admin/DoctorAccounts";
 import CommsCenter from "@/pages/admin/CommsCenter";
 import Approvals from "@/pages/admin/Approvals";
+import InventoryTracker from "@/pages/admin/InventoryTracker";
+import Billing from "@/pages/admin/Billing";
+import Compliance from "@/pages/admin/Compliance";
+import SampleLots from "@/pages/admin/SampleLots";
+import EmailSequences from "@/pages/admin/EmailSequences";
 import MyTasks from "@/pages/rep/MyTasks";
 import CommsHub from "@/pages/rep/CommsHub";
 import LeadCapture from "@/pages/rep/LeadCapture";
 import MyPipeline from "@/pages/rep/MyPipeline";
+import Commission from "@/pages/rep/Commission";
+import RoutePlanner from "@/pages/rep/RoutePlanner";
+import QuoteBuilder from "@/pages/rep/QuoteBuilder";
+import ExpenseTracker from "@/pages/rep/ExpenseTracker";
+import ContentLibrary from "@/pages/rep/ContentLibrary";
+import MyContacts from "@/pages/rep/MyContacts";
+import ObjectionLibrary from "@/pages/rep/ObjectionLibrary";
 import DoctorHome from "@/pages/doctor/DoctorHome";
 import OrderProducts from "@/pages/doctor/OrderProducts";
 import OrderHistory from "@/pages/doctor/OrderHistory";
@@ -54,13 +66,13 @@ function AuthenticatedRoutes() {
         <Route path="comms" element={<CommsCenter />} />
         <Route path="approvals" element={<Approvals />} />
         <Route path="pipeline" element={<Placeholder title="Pipeline" />} />
-        <Route path="sequences" element={<Placeholder title="Email Sequences" />} />
+        <Route path="sequences" element={<EmailSequences />} />
         <Route path="territory" element={<Placeholder title="Territory Map" />} />
         <Route path="calendar" element={<Placeholder title="Calendar" />} />
-        <Route path="inventory" element={<Placeholder title="Inventory" />} />
-        <Route path="billing" element={<Placeholder title="Billing" />} />
-        <Route path="samples" element={<Placeholder title="Sample Lots" />} />
-        <Route path="compliance" element={<Placeholder title="Compliance" />} />
+        <Route path="inventory" element={<InventoryTracker />} />
+        <Route path="billing" element={<Billing />} />
+        <Route path="samples" element={<SampleLots />} />
+        <Route path="compliance" element={<Compliance />} />
         <Route path="onboarding" element={<Placeholder title="Rep Onboarding" />} />
         <Route path="training" element={<Placeholder title="Training" />} />
         <Route path="reports" element={<Placeholder title="Reports" />} />
@@ -79,17 +91,17 @@ function AuthenticatedRoutes() {
         <Route path="comms" element={<CommsHub />} />
         <Route path="capture" element={<LeadCapture />} />
         <Route path="pipeline" element={<MyPipeline />} />
-        <Route path="contacts" element={<Placeholder title="My Contacts" />} />
-        <Route path="commission" element={<Placeholder title="Commission" />} />
+        <Route path="contacts" element={<MyContacts />} />
+        <Route path="commission" element={<Commission />} />
         <Route path="leaderboard" element={<Placeholder title="Leaderboard" />} />
         <Route path="calendar" element={<Placeholder title="Calendar" />} />
-        <Route path="expenses" element={<Placeholder title="Expenses" />} />
-        <Route path="quotes" element={<Placeholder title="Quotes" />} />
-        <Route path="content" element={<Placeholder title="Content Library" />} />
+        <Route path="expenses" element={<ExpenseTracker />} />
+        <Route path="quotes" element={<QuoteBuilder />} />
+        <Route path="content" element={<ContentLibrary />} />
         <Route path="training" element={<Placeholder title="Training" />} />
         <Route path="chat" element={<Placeholder title="Chat" />} />
-        <Route path="route" element={<Placeholder title="Route Planner" />} />
-        <Route path="objections" element={<Placeholder title="Objections" />} />
+        <Route path="route" element={<RoutePlanner />} />
+        <Route path="objections" element={<ObjectionLibrary />} />
         <Route path="settings" element={<Placeholder title="Settings" />} />
       </Route>
 
