@@ -394,11 +394,3 @@ export const calendarEvents: CalendarEvent[] = [
   { repId: 'u5', day: 'Thu', time: '1:00 PM', title: 'Visit Bay Area Surgical', type: 'Visit' },
   { repId: 'u5', day: 'Fri', time: '3:00 PM', title: 'Call Dr. Tanaka', type: 'Call' },
 ];
-  { name: 'Dr. Renata Osei', specialty: 'Urology', city: 'Tampa', state: 'FL', npi: '1234567890', practice: 'Urology Associates', phone: '(813) 555-0101', credential: 'MD' },
-  { name: 'Dr. Jin Park', specialty: 'Dermatology', city: 'New York', state: 'NY', npi: '2345678901', practice: 'Park Derm Group', phone: '(212) 555-0102', credential: 'MD' },
-  { name: 'Dr. Marcus Webb', specialty: 'OB/GYN', city: 'Miami', state: 'FL', npi: '3456789012', practice: 'Coastal Women\'s Health', phone: '(305) 555-0103', credential: 'DO' },
-  { name: 'Dr. Elena Cruz', specialty: 'Urology', city: 'San Francisco', state: 'CA', npi: '4567890123', practice: 'Cruz & Associates', phone: '(415) 555-0104', credential: 'MD' },
-  { name: 'Dr. Samuel Addo', specialty: 'Surgery', city: 'Tampa', state: 'FL', npi: '5678901234', practice: 'Tampa Surgery Ctr', phone: '(813) 555-0105', credential: 'MD' },
-  { name: 'Dr. Maria Diallo', specialty: 'Internal Medicine', city: 'Boston', state: 'MA', npi: '6789012345', practice: 'Boston Med Group', phone: '(617) 555-0106', credential: 'MD' },
-  { name: 'Dr. Carlos Reyes', specialty: 'Orthopedics', city: 'Chicago', state: 'IL', npi: '7890123456', practice: 'Reyes Ortho', phone: '(312) 555-0107', credential: 'MD' },
-];
