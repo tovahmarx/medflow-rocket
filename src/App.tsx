@@ -104,6 +104,7 @@ function AuthenticatedRoutes() {
         </Route>
 
         {/* Rep Routes */}
+        <Route element={<RoleGuard allowedRole="rep" />}>
         <Route path="/rep" element={<RepShell />}>
           <Route index element={<MyTasks />} />
           <Route path="comms" element={<CommsHub />} />
