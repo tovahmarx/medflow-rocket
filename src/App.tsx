@@ -26,18 +26,6 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-function PlaceholderPage({ title }: { title: string }) {
-  const { TopBar } = require("@/components/layout/TopBar");
-  return (
-    <>
-      <TopBar title={title} />
-      <div className="flex items-center justify-center p-8">
-        <p className="text-sm text-muted-foreground">{title} — coming soon</p>
-      </div>
-    </>
-  );
-}
-
 function Placeholder({ title }: { title: string }) {
   return (
     <div className="p-4">
