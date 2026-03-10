@@ -14,7 +14,7 @@ const sizes = {
 
 export function AvatarCircle({ initials, className, size = 'md' }: AvatarCircleProps) {
   return (
-    <div className={cn('flex items-center justify-center rounded-full bg-primary/10 font-semibold text-primary', sizes[size], className)}>
+    <div className={cn('flex items-center justify-center rounded-full bg-gradient-to-br from-primary/15 to-primary/5 font-semibold text-primary ring-1 ring-primary/10', sizes[size], className)}>
       {initials}
     </div>
   );

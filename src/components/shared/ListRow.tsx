@@ -16,9 +16,9 @@ export function ListRow({ icon, avatar, primary, secondary, right, onClick, clas
     <div
       onClick={onClick}
       className={cn(
-        'flex items-center gap-3 rounded-lg border bg-card p-3 tap-target',
+        'flex items-center gap-3 rounded-lg bg-card p-3 tap-target shadow-sm transition-all duration-200',
         leftBorder,
-        onClick && 'cursor-pointer active:bg-muted/50',
+        onClick && 'cursor-pointer hover:shadow-md active:scale-[0.98]',
         className
       )}
     >
