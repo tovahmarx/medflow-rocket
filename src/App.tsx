@@ -56,6 +56,7 @@ import Chat from "@/pages/shared/Chat";
 import TrainingHub from "@/pages/shared/TrainingHub";
 import HelpSupport from "@/pages/shared/HelpSupport";
 import NotFound from "./pages/NotFound";
+import RoleGuard from "@/components/shared/RoleGuard";
 
 const queryClient = new QueryClient();
 
