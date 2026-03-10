@@ -12,7 +12,6 @@ export default function MyRep() {
   const [feedbackSent, setFeedbackSent] = useState(false);
   const myAccount = doctorAccounts.find(d => d.userId === user?.id);
   const rep = myAccount ? users.find(u => u.id === myAccount.assignedRep) : null;
-  const [feedbackSent, setFeedbackSent] = useState(false);
 
   return (
     <>
