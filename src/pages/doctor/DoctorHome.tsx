@@ -25,8 +25,8 @@ export default function DoctorHome() {
         </AIInsightCard>
 
         <div className="grid grid-cols-3 gap-3">
-          <StatCard label="Total Orders" value="4" />
-          <StatCard label="Lifetime Spend" value="$3,952" />
+          <StatCard label="Total Orders" value={String(myOrders.length)} />
+          <StatCard label="Lifetime Spend" value={`$${totalSpend.toLocaleString()}`} />
           <StatCard label="Status" value="Active" className="border-success/20" />
         </div>
 
