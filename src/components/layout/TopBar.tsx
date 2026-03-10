@@ -12,7 +12,12 @@ export function TopBar({ title }: { title: string }) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const unread = notifications.filter(n => !n.read).length;
+  const userNotifications = notifications.filter(n => {
+    if (n.forRole !== role) return false;
+    if (n.forUserId && n.forUserId !== user?.id) return false;
+    return true;
+  });
+  const unread = userNotifications.filter(n => !n.read).length;
 
   const iconColor = (type: string) =>
     type === 'destructive' ? 'bg-destructive/10 text-destructive' :
@@ -165,7 +170,7 @@ export function TopBar({ title }: { title: string }) {
       {/* Notifications */}
       <BottomSheet open={showNotifications} onClose={() => setShowNotifications(false)} title="Notifications">
         <div className="space-y-2">
-          {notifications.map(n => (
+          {userNotifications.map(n => (
             <div key={n.id} className="flex items-start gap-3 rounded-lg p-2 active:bg-muted">
               <div className={`mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full ${iconColor(n.icon)}`}>
                 <Bell className="h-4 w-4" />
