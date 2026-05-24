@@ -1,73 +1,68 @@
-# Welcome to your Lovable project
+# MedFlow Rocket
 
-## Project info
+A comprehensive medical/pharma sales CRM platform with three user portals: Sales Reps, Doctors, and Administrators.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Live Demo
+**https://medflow-rocket.vercel.app**
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+### Sales Rep Portal
+- Daily task management and pipeline tracking
+- Lead capture and contact management
+- Quote builder and commission tracking
+- Route planner for doctor visits
+- Expense tracker and reporting
+- Communications hub and content library
+- Objection handling scripts
 
-**Use Lovable**
+### Doctor Portal
+- Product catalog and ordering
+- Order history and tracking
+- Educational content and resources
+- Direct rep communication
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+### Admin Portal
+- Command center dashboard
+- Sales rep and doctor account management
+- Inventory and sample lot tracking
+- Compliance monitoring
+- Territory mapping
+- Quote and expense approvals
+- Email sequences and communications
+- Goal tracking and reporting
+- Billing and audit logs
 
-Changes made via Lovable will be committed automatically to this repo.
+### Shared Features
+- Sales leaderboard
+- Calendar and scheduling
+- Real-time chat
+- Training hub
+- Help and support
 
-**Use your preferred IDE**
+## Tech Stack
+- **React 18** + TypeScript
+- **Vite** for fast builds
+- **Tailwind CSS** + **shadcn/ui** (Radix primitives)
+- **React Router** for role-based routing
+- **TanStack React Query** for data fetching
+- **Vercel** for deployment
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Getting Started
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+# Clone the repo
+git clone https://github.com/tovahmarx/medflow-rocket.git
 
-Follow these steps:
+# Install dependencies
+npm install
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start dev server
 npm run dev
+
+# Build for production
+npm run build
 ```
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Deployment
+Auto-deploys to Vercel on push to main.
